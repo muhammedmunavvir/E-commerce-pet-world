@@ -1,56 +1,16 @@
-// import axios from 'axios'
-// import React, { useEffect, useState } from 'react'
-// import { useParams } from 'react-router-dom'
 
-// const Productdetails = () => {
-//  const  {id}= useParams()
-
-
-//  const[url,geturl]=useState([])
-
-//  useEffect(()=>{
-//     const fetchproducts=async()=>{
-//         try{
-//            const res=await axios.get("http://localhost:5000/products")
-//            geturl(res.data) 
-//         }
-//         catch{
-// console.log("Error");
-         
-//         }
-//     }
-//     fetchproducts()
-//  },[])
-
-// const filtered=url.filter((item)=>item.id===id)
-        
- 
-//   return (
-//     <div>Productdetails
-//    {
-//     filtered.map((obj)=>(
-//         <div >
-//         <img src={obj.url} alt="" />
-//         <p>{obj.heading}</p>
-//         </div>
-//     ))
-//    }
-//     </div>
-//   )
-// }                               
-
-// export default Productdetails
 
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { carthandle } from '../foraddcart/Addcart';
 
 
 const Productdetails = () => {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
+   
   
 
   useEffect(() => {
@@ -69,22 +29,54 @@ const Productdetails = () => {
 
 
 
-  // const addProduct=async()=>{
-  //   const user=localStorage.getItem("Uid")
-  //   const res=await axios.post(`http://localhost:5000/users/${user}`,{cart:[...filtered,filtered]})
-  // }
-
- const tocart =async(product)=>{
-   await carthandle(product)
  
+ const navigate=useNavigate()
+  const tocart = async (product) => {
+    const userLoggedIn = localStorage.getItem('Uid') && localStorage.getItem('userEmail');
+    
+    if (userLoggedIn) {
+      await carthandle(product);
+    } else {
+     
+      alert("you want to login to add product")
+      navigate("/login");
+    }
+  };
+
+const nav=useNavigate()
+const backclickhandle=()=>{
+  nav(-1)
 }
+  
 
   return (
+    
     <div style={{ padding: '40px 20px', fontFamily: 'Arial, sans-serif' }}>
       {filtered.length > 0 ? (
         filtered.map((product) => (
           <div key={product.id} style={{ display: 'flex', gap: '30px', alignItems: 'start' }}>
             {/* Product Image */}
+            <button 
+  onClick={backclickhandle} 
+  className="flex items-center px-4 py-2 bg-gray-400 text-white text-sm font-semibold rounded-lg hover:bg-gray-500 transition duration-300"
+>
+  <svg 
+    className="w-4 h-4 mr-2" 
+    xmlns="http://www.w3.org/2000/svg" 
+    fill="none" 
+    viewBox="0 0 24 24" 
+    stroke="currentColor"
+  >
+    <path 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      strokeWidth="2" 
+      d="M15 12H3m0 0l9-9m-9 9l9 9" 
+    />
+  </svg>
+  Back
+</button>
+
             <img
               src={product.url}
               alt={product.heading}
@@ -110,9 +102,11 @@ const Productdetails = () => {
               <p style={{ fontSize: '16px', color: '#888' }}>
                 Rating: <span style={{ color: '#ffc107' }}>{product.rating} / 5</span>
               </p>
+
               <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg"
+
               
-              onClick={()=>tocart(product)}>Add to Cart</button>
+             onClick={()=>tocart(product)}  >Add to Cart</button>
             </div>
           </div>
         ))

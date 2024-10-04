@@ -9,6 +9,10 @@ import { Navbar } from "./components/Navbar";
 import Footer from "./components/Footer";
 import Productdetails from "./components/details/Productdetails";
 import Cartpage from "./pages/Cartpage";
+import Paymentsection from "./pages/Paymentsection";
+import Summarypage from "./pages/Summarypage";
+import Cat from "./components/cat/Cat";
+import Dog from "./components/dog/Dog";
 function App() {
   return <div>
 <Navbar/>
@@ -18,8 +22,12 @@ function App() {
  <Route path="/login" element={<Login/>} />
  <Route path="/registerpage" element={<Register/>}/>
  <Route path="/Allproducts" element={<Allproducts/>}/>
+ <Route path="/catproducts" element={<Cat/>}/>
+ <Route path="/dogproducts" element={<Dog/>}/>
  <Route path="/productdetails/:id" element={<Productdetails/>}/>
  <Route path="/cartpage" element={<Cartpage/>}/>
+ <Route path="/payment" element={<Paymentsection/>}/>
+ <Route path="/ordersum" element={<Summarypage/>}/>
 </Routes>
 <Footer/>
  

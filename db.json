@@ -1,32 +1,22 @@
 {
   "users": [
     {
-      "id": "6f9c",
+      "id": "7a45",
       "fullname": "munavvir",
       "email": "munavvirmuhammed296@gmail.com",
-      "phonenumber": "8592980406",
+      "phonenumber": "08592980406",
       "userName": "munavvir",
       "password": "123456",
       "conformpassword": "123456",
       "cart": [
         {
-          "id": "1",
-          "heading": "Pets at Home Degradable Dog Poop Bags 200 Pack+20 Extra Free !",
-          "discription": "Easily carry and hygienically dispose of dog waste with tie-handle bags. Portable, quick-dispensing pack offers great value with 20 extra bags.",
-          "url": "https://cdn.petsathome.com/public/images/products/900_7137876.jpg",
+          "id": "3",
+          "heading": "Royal Canin Veterinary Hypoallergenic Adult Dry Dog Food",
+          "discription": "Royal Canin Veterinary Hypoallergenic Adult Dry Dog Food is expertly formulated to support dogs with food sensitivities. This vet-recommended diet features hydrolyzed proteins",
+          "url": "https://cdn.petsathome.com/public/images/products/900_7103687.jpg",
           "catogory": "dog-food",
-          "price": "6",
-          "rating": "3.8",
-          "qty": 1
-        },
-        {
-          "id": "20",
-          "heading": "3 Peaks Anti Bacterial Square Dog Bed Green",
-          "discription": "Anti-bacterial and water-resistant for resting after the biggest adventures",
-          "url": "https://cdn.petsathome.com/public/images/products/900_P71628.jpg",
-          "catogory": "dog-beds",
-          "price": 35,
-          "rating": 4.5,
+          "price": 20,
+          "rating": 4,
           "qty": 1
         }
       ]

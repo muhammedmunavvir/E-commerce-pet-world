@@ -4,6 +4,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+ 
 
 const Login = () => {
   const initialVal = {
@@ -21,8 +22,8 @@ const Login = () => {
       try {
         const res = await axios.get("http://localhost:5000/users");
         setData(res.data);
-      } catch (err) {
-        console.log("Error while fetching users data", err);
+      } catch  {
+        console.log("Error");
       }
     };
     fetchData();
@@ -31,9 +32,9 @@ const Login = () => {
  
   const inputHandle = (e) => {
     const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value  
+    setValues({...values,[name]: value  
+      
+      
     });
   };
 
@@ -53,8 +54,10 @@ const Login = () => {
 
   const toHomepage = (e) => {
     e.preventDefault();
-    
-    const user=data.find((user)=>user.email===values.email)
+    const user=data.find((user)=>user.email===values.email)  
+   
+
+
     if (validateLogin()) {
       localStorage.setItem("userEmail",user.email)
       localStorage.setItem("Uid",user.id)

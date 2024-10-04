@@ -16,7 +16,7 @@ export const Prodectgrid = () => {
     const getproduct = async () => {
       try {
         const res = await axios.get("http://localhost:5000/products");
-        console.log(res.data);
+       
         getfeaturedproducts(res.data);
       } catch {
         console.log("error fetching products");
@@ -34,7 +34,7 @@ export const Prodectgrid = () => {
       nav(`/Productdetails/${id}`)
   }
 
-  return (
+  return (  
     <div>
     <section className="container mx-auto px-6 py-12">
       <h3 className="text-3xl font-bold text-gray-700 mb-8">Featured Products</h3>
