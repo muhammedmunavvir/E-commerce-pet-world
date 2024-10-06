@@ -36,16 +36,49 @@ export const Navbar = () => {
   };
 
   const fordetails = (id) => {
+    setsearchitem("");
     navigate(`/productdetails/${id}`); // Navigate to product details page
+    
   };
 
   const nav=useNavigate()
+ 
+ 
+  const [cart,setcart]=useState([])
+  const userid=localStorage.getItem("Uid")
+  const getcart=async ()=>{
+    if(userid){
+      try{
+        const res=await axios.get(`http://localhost:5000/users/${userid}`)
+        setcart(res.data.cart)
+      }
+      catch{
+        console.log("Error");
+        
+      }
+    }
+   }
+
+  useEffect(()=>{
+     
+     getcart()
+  },[cart,userid])
+
   function logout(){
     localStorage.removeItem('Uid')
-    localStorage.removeItem('userEmail')
+    getcart()
+    localStorage.removeItem('name')
+
    window.confirm("Are you sure you want to logout?")
+ 
      nav("/")
   }
+
+  //user name
+  const uName=localStorage.getItem("name")
+
+
+
 
   return (
     <div>
@@ -75,7 +108,7 @@ export const Navbar = () => {
 
             {/* Filtered Results */}
             {searchitem && filtered.length > 0 && (
-              <div className="absolute z-10 mt- bg-white shadow-lg w-full max-h-60 overflow-y-auto border border-gray-300 rounded-md">
+              <div className="absolute top-12 z-10 mt- bg-white shadow-lg w-full max-h-60 overflow-y-auto border border-gray-300 rounded-md">
                 {filtered.map((item) => (
                   <p 
                     key={item.id} 
@@ -107,28 +140,45 @@ export const Navbar = () => {
       <circle cx="17" cy="20" r="1" />
     </svg>
     {/* Badge for number of items in the cart */}
-    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-      {/* Replace this with your cart item count */}
-      3
-    </span>
+   {cart.length!==0 && userid?(
+     <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+      
+     {cart.length}
+   </span>
+   ):null}
   </NavLink>
 </div>
 
 <div className="relative ml-4">
-  <NavLink to="/profile">
+  {/* <NavLink to="/profile">
     <img 
       src="https://e7.pngegg.com/pngimages/798/436/png-clipart-computer-icons-user-profile-avatar-profile-heroes-black.png" 
       alt="Profile"
       className="h-10 w-10 rounded-full border-2 border-teal-500 hover:scale-105 transition duration-300"
     />
-  </NavLink>
-  <button 
+  </NavLink> */}
+  {/* <button 
     onClick={logout} 
     className="mt-1 text-teal-500 hover:text-teal-600 focus:outline-none"
   >
     Logout
   </button>
-  <NavLink to="/login" className="text-gray-300 hover:text-white">Login</NavLink>
+  <NavLink to="/login" className="text-gray-300 hover:text-white">Login</NavLink> */}
+
+
+{uName ? (
+                <div className="flex items-center space-x-4">
+                  <span className="text-white font-bold ">{uName.toUpperCase()}</span>
+                  <button 
+                    onClick={logout} 
+                    className="text-teal-500 text-lg font-bold hover:text-teal-600 focus:outline-none"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <NavLink to="/login" className="text-gray-300 text-xl font-bold hover:text-white">Login</NavLink>
+              )}
 </div>
 
 

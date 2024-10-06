@@ -39,6 +39,13 @@ export const Allproducts = () => {
             <h4 className="text-xl font-semibold mb-2">{obj.heading}</h4>
             <p className="text-gray-700 mb-2">{obj.description}</p> 
             <p className="text-lg font-bold text-gray-800 mb-4">${obj.price}</p> 
+           <p className="text-lg font-bold text-white bg-green-500 rounded px-2 py-1 mb-4 inline-block">
+  {obj.rating} <span className="text-white">⭐</span>
+</p>
+
+
+
+
          
           </div> 
            

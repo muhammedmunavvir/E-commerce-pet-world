@@ -47,7 +47,7 @@ const Summarypage = () => {
           </li>
           <li className="flex justify-between">
             <span className="text-gray-700">Total Amount:</span>
-            <span className="font-semibold text-gray-800">$99.99</span>
+            <span className="font-semibold text-gray-800">totel amout{}</span>
           </li>
         </ul>
       </div>

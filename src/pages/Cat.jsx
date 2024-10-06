@@ -5,7 +5,7 @@ const Cat = () => {
     
   return (
     <div>
-cart pages
+cat pages
 
     </div>
   )

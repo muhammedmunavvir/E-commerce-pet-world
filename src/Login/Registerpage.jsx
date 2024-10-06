@@ -1,7 +1,7 @@
 
 
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -13,7 +13,8 @@ const Register = () => {
     userName: "",
     password: "",
     conformpassword: "",
-    cart:[]
+    cart:[],
+    orderitems:[]
   });
 
   const [error, seterror] = useState({});
@@ -54,32 +55,53 @@ const Register = () => {
     return Object.keys(errors).length === 0;
   };
 
+  // email auth
+
+  const [data,setData]=useState([])
+
+  useEffect(()=>{
+    const getd=async()=>{
+      try{
+const res=await axios.get(`http://localhost:5000/users`)
+setData(res.data)
+      }catch{
+        console.log("er");
+        
+      }
+    }
+
+    getd()
+  },[])
+  
+
   const submithandle = async (e) => {
-
-
     e.preventDefault();
 
     if (validate(user)) {
-      try {
-        const res = await axios.post("http://localhost:5000/users", user);
-        alert("Registration successful!"); 
+
+      const exist=data.find((val)=>val.email===user.email)
+
+      if(exist){
+        alert("email id already taken")
+      }else{
+        try {
+          const res = await axios.post("http://localhost:5000/users", user);
+          alert("Registration successful!"); 
+    
+          nav("/login")
   
-        nav("/login")
-
-       setuser({           
-          fullname: "",
-          email: "",
-          phonenumber: "",
-          userName: "",
-          password: "",
-          conformpassword: "",
-        }); 
-   
-       
-
-      } catch  {
-        console.log("error");
-      
+         setuser({           
+            fullname: "",
+            email: "",
+            phonenumber: "",
+            userName: "",
+            password: "",
+            conformpassword: "",
+          }); 
+        } catch  {
+          console.log("error");
+        
+        }
       }
     }
   };
@@ -189,6 +211,17 @@ const Register = () => {
           </p>
         </div>
       </div>
+     {/* Video Section
+     <div className="mt-[-5] lg:mt-0 w-full lg:w-1/2 flex justify-center">
+          <video
+            src="https://cdn.dribbble.com/uploads/48226/original/b8bd4e4273cceae2889d9d259b04f732.mp4?1689028949"
+         
+            autoPlay
+            muted
+            loop
+            className="rounded-lg shadow-md w-full lg:w-auto max-w-md"
+          />
+        </div> */}
     </div>
   );
 };

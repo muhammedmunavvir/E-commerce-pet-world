@@ -59,7 +59,7 @@ const Login = () => {
 
 
     if (validateLogin()) {
-      localStorage.setItem("userEmail",user.email)
+      localStorage.setItem("name",user.userName)
       localStorage.setItem("Uid",user.id)
       navigate('/'); 
     }

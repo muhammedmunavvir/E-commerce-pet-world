@@ -23,10 +23,10 @@ export const Heropage = () => {
         </div>
 
         {/* Image Section */}
-        <div className="w-full lg:w-1/2 flex justify-center relative mt-8 lg:mt-0">
+        <div className="w-full lg:w-1/2 flex justify-center relative mt-8 lg:mt-0 ">
           <div className="relative w-full lg:w-4/5">
           <img
-                        src="https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src="https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 
               alt="Happy Dog"
               className="w-4/5 h-auto object-cover rounded-lg shadow-lg absolute top-0 right-0 transform transition-transform duration-500 hover:scale-105"
