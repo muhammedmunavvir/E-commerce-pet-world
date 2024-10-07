@@ -6,16 +6,17 @@ const Cat = () => {
 
  const[state,setstate]= useState([])
 
- useEffect(()=>{
-     const  getcat= async() => {
-        try{
-            const res=await axios.get("http://localhost:5000/products")
-            setstate(res.data)
-        } 
-        catch{
+ const  getcat= async() => {
+    try{
+        const res=await axios.get("http://localhost:5000/products")
+        setstate(res.data)
+    } 
+    catch{
 
-        }  
-     }
+    }  
+ }
+
+ useEffect(()=>{
      getcat()
  },[])
 
@@ -25,9 +26,7 @@ const Cat = () => {
   
  }
 
-
- 
- const cat=state.filter((item)=>item.catogory==="cat-food")
+ const cat=state.filter((item)=>item.catogory==="cat-food"||item.catogory==="cat-treat")
  
 
 

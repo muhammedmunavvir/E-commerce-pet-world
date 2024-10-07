@@ -4,15 +4,15 @@ export const Dashboard = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
       {/* Sidebar */}
-      <aside className="w-full md:w-1/4 lg:w-1/5 bg-blue-700 text-white p-5 space-y-4">
-        <h2 className="text-2xl font-semibold mb-6">Admin Panel</h2>
-        <nav className="space-y-2">
+      <aside className="w-full md:w-1/4 lg:w-1/5 bg-gray-500 text-white p-5 space-y-4">
+        <h2 className="text-2xl font-semibold mb-6">Dashboard</h2>
+        {/* <nav className="space-y-2">
           <a href="#" className="block px-4 py-2 rounded hover:bg-blue-500">Dashboard</a>
           <a href="#" className="block px-4 py-2 rounded hover:bg-blue-500">Manage Users</a>
           <a href="#" className="block px-4 py-2 rounded hover:bg-blue-500">Products</a>
           <a href="#" className="block px-4 py-2 rounded hover:bg-blue-500">Orders</a>
           <a href="#" className="block px-4 py-2 rounded hover:bg-blue-500">Settings</a>
-        </nav>
+        </nav> */}
       </aside>
 
       {/* Main Content */}
@@ -21,9 +21,9 @@ export const Dashboard = () => {
         <div className="flex justify-between items-center bg-white p-4 rounded shadow">
           <h1 className="text-2xl font-bold">Dashboard</h1>
           <div className="flex items-center space-x-4">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Notifications</button>
+            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" >Notifications</button>
             <img
-              src="https://via.placeholder.com/40"
+              src="https://cdn-icons-png.flaticon.com/512/565/565422.png"
               alt="User Profile"
               className="w-10 h-10 rounded-full"
             />

@@ -1,3 +1,5 @@
+
+import {toaster,toast} from 'sonner'
 import axios from "axios";
 
 
@@ -17,7 +19,8 @@ export const carthandle = async (product) => {
        await axios.patch(`http://localhost:5000/users/${user}`, { cart: updatedcart,
          
         });
-        alert("Item Successfully added to the cart..!");
+        // alert("Item Successfully added to the cart..!");
+        toast.success('This is a notification!');
       }
     } catch {
       console.log("Error");

@@ -26,7 +26,7 @@ export const Addcat = () => {
        getcat()
     },[])
 
-   const catonly=cat.filter((item)=>item.catogory==="cat-food")
+   const catonly=cat.filter((item)=>item.catogory==="cat-food" ||item.catogory=="cat-treat")
 //for edit
  const navigate= useNavigate()
    const foredit=(id)=>{

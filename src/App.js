@@ -21,6 +21,7 @@ import { Category } from "./admin/adminpages/Category";
 import { Addcat } from "./admin/Cat.Dog/Addcat";
 import { Editing } from "./admin/adminpages/Editing";
 import { Addnewproduct } from "./admin/adminpages/Addnewproduct";
+import { Userdetails } from "./admin/adminpages/Userdetails";
 
 //adimin section
 
@@ -47,12 +48,14 @@ const forhide=location.pathname.startsWith("/admin")
 {/* //admib */}
 
 <Route path="/admin" element={<Adminhome/>}>
-  <Route path="dashboard" element={<Dashboard/>}/>
+  <Route index element={<Dashboard/>}/>
   <Route path="userlist" element={<UserList/>}/>
-  <Route path="category" element={<Category/>}>  <Route path="addcat" element={ <Addcat/>}/></Route>
+  <Route path="category" element={<Category/>}> <Route index element={ <Addcat/>}/> <Route path="addcat" element={ <Addcat/>}/></Route>
   <Route path="dashboard" element={<Dashboard/>}/>
   <Route path="editing/:pID" element={<Editing/>}/>
   <Route path="addnewproduct"element={<Addnewproduct/>}/>
+
+  <Route path="userdetails/:id" element={<Userdetails/>}/>
 
 </Route>
  

@@ -150,21 +150,7 @@ export const Navbar = () => {
 </div>
 
 <div className="relative ml-4">
-  {/* <NavLink to="/profile">
-    <img 
-      src="https://e7.pngegg.com/pngimages/798/436/png-clipart-computer-icons-user-profile-avatar-profile-heroes-black.png" 
-      alt="Profile"
-      className="h-10 w-10 rounded-full border-2 border-teal-500 hover:scale-105 transition duration-300"
-    />
-  </NavLink> */}
-  {/* <button 
-    onClick={logout} 
-    className="mt-1 text-teal-500 hover:text-teal-600 focus:outline-none"
-  >
-    Logout
-  </button>
-  <NavLink to="/login" className="text-gray-300 hover:text-white">Login</NavLink> */}
-
+ 
 
 {uName ? (
                 <div className="flex items-center space-x-4">

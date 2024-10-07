@@ -1,52 +1,56 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
-
 export const Adminhome = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center">
-      <header className="bg-blue-600 w-full text-white py-6 mb-8 shadow-lg">
-        <h1 className="text-3xl font-bold text-center">Admin Panel</h1>
-      </header>
-      
-      <nav className="flex flex-col md:flex-row gap-4 md:gap-8 text-center">
-        <NavLink 
-          to="dashboard" 
-          className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-700 transition duration-300"
-        >
-          Dashboard
-        </NavLink>
-        <NavLink 
-          to="userlist" 
-          className="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-700 transition duration-300"
-        >
-          All Users
-        </NavLink>
-        <NavLink 
-          to="category" 
-          className="bg-yellow-500 text-white px-6 py-3 rounded hover:bg-yellow-700 transition duration-300"
-        >
-          Categories
-        </NavLink>
-        <NavLink 
-          to="Addproducts" 
-          className="bg-purple-500 text-white px-6 py-3 rounded hover:bg-purple-700 transition duration-300"
-        >
-          Add Products
-        </NavLink>
-        <NavLink 
-          to="home" 
-          className="bg-red-500 text-white px-6 py-3 rounded hover:bg-red-700 transition duration-300"
-        >
-          Home
-        </NavLink>
+    <div className="min-h-screen flex " style={{background:"#5d6e6e"}} >
+      {/* Sidebar */}
+      <aside className="w-64  text-white flex flex-col p-6" style={{background:"#255c4f"}}>
+        <h1 className="text-3xl font-bold mb-6 text-center">Admin Panel</h1>
+        <nav className="flex flex-col space-y-4">
+          <NavLink 
+            to="dashboard" 
+            className="px-4 py-2 rounded hover:bg-blue-500 transition duration-300"
+          >
+            Dashboard
+          </NavLink>
+          <NavLink 
+            to="userlist" 
+            className="px-4 py-2 rounded hover:bg-green-500 transition duration-300"
+          >
+            All Users
+          </NavLink>
+          <NavLink 
+            to="category" 
+            className="px-4 py-2 rounded hover:bg-yellow-500 transition duration-300"
+          >
+            Categories
+          </NavLink>
+          <NavLink 
+            to="Addproducts" 
+            className="px-4 py-2 rounded hover:bg-purple-500 transition duration-300"
+          >
+            Add Products
+          </NavLink>
+          <NavLink 
+            to="home" 
+            className="px-4 py-2 rounded hover:bg-red-500 transition duration-300"
+          >
+            Home
+          </NavLink>
+        </nav>
+      </aside>
 
-      </nav>
-      <div>
-        <div>
-            <Outlet/>
+      {/* Main Content */}
+      <main className="flex-1 p-8">
+        <header className="bg-white rounded-lg shadow p-6 mb-8">
+          <h2 className="text-2xl font-semibold">Welcome to the Admin Panel</h2>
+          <p className="mt-2 text-gray-600">Manage your application efficiently.</p>
+        </header>
+        <div className="bg-white rounded-lg shadow p-6">
+          <Outlet/>
         </div>
-      </div>
+      </main>
     </div>
   );
 };

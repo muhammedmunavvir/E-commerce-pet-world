@@ -47,6 +47,8 @@ const Login = () => {
       errors.info = "Incorrect email or password";
     }
     
+   
+    
     setError(errors);
     return Object.keys(errors).length === 0;  
   };
@@ -56,12 +58,19 @@ const Login = () => {
     e.preventDefault();
     const user=data.find((user)=>user.email===values.email)  
    
-
-
     if (validateLogin()) {
-      localStorage.setItem("name",user.userName)
+      if(user.admin){
+        localStorage.setItem("name",user.userName)
+        localStorage.setItem("Uid",user.id)
+        localStorage.setItem("admin",true)
+        navigate("/admin")
+      }else if(user.block===true){
+        alert("your account is blocked")
+      }else{
+        localStorage.setItem("name",user.userName)
       localStorage.setItem("Uid",user.id)
       navigate('/'); 
+      }
     }
   };
 

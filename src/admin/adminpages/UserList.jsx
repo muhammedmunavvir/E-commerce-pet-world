@@ -1,13 +1,67 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect,useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export const UserList = () => {
-  const users = [
-    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User' },
-    { id: 3, name: 'Alex Johnson', email: 'alex@example.com', role: 'User' },
-    { id: 4, name: 'Emily Davis', email: 'emily@example.com', role: 'Moderator' },
-  ];
+ 
+  const [users,setusers]=useState([])
+
+  const [block,setlock]=useState([])
+
+  useEffect(()=>{
+    const getuser =async()=>{
+      try{
+     const res =await axios.get("http://localhost:5000/users")
+       setusers(res.data)
+      }
+      catch{
+        console.log("Error");
+      }
+    
+      
+    }
+    getuser()
+  },[])
+
+
+const nav =useNavigate()
+  const  viewuser=(id)=>{
+       nav(`/admin/userdetails/${id}`)
+       
+   }
+
+//block user
+const blockhandle=async(id)=>{
+   try{
+    await axios.patch(`http://localhost:5000/users/${id}`, {block:true})
+  // Update local state to reflect the change
+  setusers(users.map(user => 
+    user.id === id ? { ...user, block: true } : user
+  ));
+   }
+   catch{
+    console.log("Error");
+    
+   }
+}
+
+
+
+//unblock function
+const unblockhandle=async(id)=>{
+   try{
+    await axios.patch(`http://localhost:5000/users/${id}`, {block:false})
+         // Update local state to reflect the change
+    setusers(users.map(user => 
+      user.id === id ? { ...user, block: false } : user
+    ));
+   }
+   catch{
+    console.log("Error");
+    
+   }
+}
+
 
   return (
     <div className="min-h-screen p-6 bg-gray-100">
@@ -36,7 +90,7 @@ export const UserList = () => {
               {users.map((user) => (
                 <tr key={user.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-b">
-                    {user.name}
+                    {user.userName}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-b">
                     {user.email}
@@ -45,12 +99,29 @@ export const UserList = () => {
                     {user.role}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium border-b">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                      Edit
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded "
+                    onClick={()=>viewuser(user.id)} key={user.id}>
+                 View
                     </button>
-                    <button className="bg-red-500 text-white px-4 py-2 ml-3 rounded hover:bg-red-600">
-                      Delete
-                    </button>
+               {
+                !user.block?(
+                  <button className="bg-red-500 text-white px-4 py-2 ml-3 rounded "
+                  onClick={()=>blockhandle(user.id)}>
+                  Block
+                  </button>
+                ):(
+                
+                  <button  className="bg-green-500 text-white px-4 py-2 ml-3 rounded " onClick={()=>unblockhandle(user.id)}>
+                    unblock
+                  </button>
+                  
+                )
+               }
+
+          
+
+
+                    
                   </td>
                 </tr>
               ))}
