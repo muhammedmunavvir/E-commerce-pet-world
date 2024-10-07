@@ -1,12 +1,63 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 // import Cartpage from './Cartpage';  // Import the Cartpage component
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const Paymentsection = () => {
-const  nav=useNavigate()
+const  nav=useNavigate();
+
+const [cart, setCart] = useState([]);
+    const [order,setOrder]=useState([])
+    const user = localStorage.getItem("Uid");
+
+    useEffect(() => {
+      cartDisplay();
+    }, [cart]);
+
+    const cartDisplay = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/users/${user}`);
+        setCart(res.data.cart);
+        setOrder(res.data.orderitems)
+      } catch  {
+        console.log("Error");
+      }
+    };
+
+    // adrres
+
+    const [address,setAddress]=useState({
+      address:"",
+      city:"",
+      state:"",
+      zipcode:"",
+      paymentMethode:""
+
+
+    })
+
+    const handleChange=(e)=>{
+      const {value,name}=e.target;
+
+      setAddress({...address,[name]:value})
+    }
+// clear cart , order deatails
+    const clearcart = async () => {
+      try {
+      await axios.patch(`http://localhost:5000/users/${user}`,{orderitems:[...order,{items:cart,address:address,id:Date.now()}]})   
+      await axios.patch(`http://localhost:5000/users/${user}`,{cart:[]})   
+      } catch (error) {
+        console.log("Error removing item", error);
+      } 
+    };
 
  const submithandle=(e)=>{
   e.preventDefault()
+  clearcart()
+  cartDisplay()
+  
+
   nav("/ordersum")
  }
   
@@ -32,6 +83,8 @@ const  nav=useNavigate()
             <div>
               <label className="block text-gray-600 mb-2">Address</label>
               <input
+              name='address'
+              onChange={handleChange}
                 type="text"
                 placeholder="Enter your address"
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
@@ -41,6 +94,8 @@ const  nav=useNavigate()
             <div>
               <label className="block text-gray-600 mb-2">City</label>
               <input
+              name='city'
+              onChange={handleChange}
                 type="text"
                 placeholder="Enter your city"
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
@@ -53,6 +108,8 @@ const  nav=useNavigate()
             <div>
               <label className="block text-gray-600 mb-2">State</label>
               <input
+              name='state'
+              onChange={handleChange}
                 type="text"
                 placeholder="Enter your state"
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
@@ -62,6 +119,8 @@ const  nav=useNavigate()
             <div>
               <label className="block text-gray-600 mb-2">Zip Code</label>
               <input
+              name='zipcode'
+              onChange={handleChange}
                 type="text"
                 placeholder="Enter your zip code"
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
@@ -75,15 +134,15 @@ const  nav=useNavigate()
             <h4 className="text-xl font-semibold text-gray-700 mb-4">Select Payment Method</h4>
             <div className="space-y-3">
               <label className="flex items-center space-x-2">
-                <input type="radio" name="paymentMethod" value="UPI" className="form-radio text-blue-500" required />
+                <input type="radio" onChange={handleChange} name="paymentMethod" value="UPI" className="form-radio text-blue-500" required />
                 <span className="text-gray-700">UPI</span>
               </label>
               <label className="flex items-center space-x-2">
-                <input type="radio" name="paymentMethod" value="Card" className="form-radio text-blue-500" required />
+                <input type="radio" onChange={handleChange} name="paymentMethod" value="Card" className="form-radio text-blue-500" required />
                 <span className="text-gray-700">Card</span>
               </label>
               <label className="flex items-center space-x-2">
-                <input type="radio" name="paymentMethod" value="Cash" className="form-radio text-blue-500" required />
+                <input type="radio" onChange={handleChange} name="paymentMethod" value="Cash" className="form-radio text-blue-500" required />
                 <span className="text-gray-700">Cash on Delivery</span>
               </label>
             </div>

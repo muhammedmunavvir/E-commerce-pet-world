@@ -9,78 +9,65 @@
       "password": "123456",
       "conformpassword": "123456",
       "admin": true,
-      "cart": [
+      "cart": [],
+      "orderitems": [
         {
-          "id": "11",
-          "heading": "Pets at Home Teddy Oval Dog Bed Dark Grey",
-          "discription": "Enjoy a cosy, easy-to-clean bed with a removable dual-sided cushion and super soft lining for your dogs ultimate comfort.",
-          "url": "https://cdn.petsathome.com/public/images/products/900_P70983.jpg",
-          "catogory": "dog-beds",
-          "price": 26,
-          "rating": 4.5,
-          "qty": 1
+          "items": [
+            {
+              "id": "23",
+              "heading": "Whiskas 1+ Adult Wet Cat Food Poultry In Jelly 80x85g",
+              "discription": "High-quality, nutritious wet food for adult cats, supporting muscle strength, natural defences, and a healthy skin and coat.",
+              "url": "https://cdn.petsathome.com/public/images/products/900_7147090.jpg",
+              "catogory": "cat-food",
+              "price": 25,
+              "rating": "4.5",
+              "qty": 1
+            },
+            {
+              "id": "20",
+              "heading": "3 Peaks Anti Bacterial Square Dog Bed Green",
+              "discription": "Anti-bacterial and water-resistant for resting after the biggest adventures",
+              "url": "https://cdn.petsathome.com/public/images/products/900_P71628.jpg",
+              "catogory": "dog-beds",
+              "price": 35,
+              "rating": 4.5,
+              "qty": 1
+            }
+          ],
+          "address": {
+            "address": "munja",
+            "city": "wijiw",
+            "state": "wkniw",
+            "zipcode": "wnijiw",
+            "paymentMethode": "",
+            "paymentMethod": "UPI"
+          },
+          "id": 1728295751277
         },
         {
-          "id": "14",
-          "heading": "3 Peaks Nevis Dog Bed Green",
-          "discription": "Water-resistant, tough and comfortable for resting after adventures",
-          "url": "https://cdn.petsathome.com/public/images/products/900_P71626.jpg",
-          "catogory": "dog-beds",
-          "price": 35,
-          "rating": 4.5,
-          "qty": 2
-        },
-        {
-          "id": "20",
-          "heading": "3 Peaks Anti Bacterial Square Dog Bed Green",
-          "discription": "Anti-bacterial and water-resistant for resting after the biggest adventures",
-          "url": "https://cdn.petsathome.com/public/images/products/900_P71628.jpg",
-          "catogory": "dog-beds",
-          "price": 35,
-          "rating": 4.5,
-          "qty": 1
-        },
-        {
-          "id": "30",
-          "heading": "Classic Wet Cat Food Meat & Fish In Jelly 24x400g",
-          "discription": "UK-made, nutritious cat food with locally sourced ingredients. Supports British and Irish farmers with essential vitamins and nutrients.",
-          "url": "https://cdn.petsathome.com/public/images/products/900_21927.jpg",
-          "catogory": "cat-food",
-          "price": 22,
-          "rating": 4.7,
-          "qty": 1
-        },
-        {
-          "id": "25",
-          "heading": "Purina ONE Adult Mini Fillets Wet Cat Food Gravy 40x85g",
-          "discription": "Supports gut balance with soluble fibres, nourishes bones, muscles, joint health, and promotes radiant skin and coat. Delicious, high-quality protein included.",
-          "url": "https://cdn.petsathome.com/public/images/products/900_7135257.jpg",
-          "catogory": "cat-food",
-          "price": 16,
-          "rating": 4.5,
-          "qty": 1
-        },
-        {
-          "id": "61",
-          "heading": "wacking arana from braxil",
-          "discription": "new item ",
-          "url": "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
-          "category": "cat-food",
-          "price": "85",
-          "rating": "5"
-        },
-        {
-          "id": "32",
-          "heading": "Webbox Lick-e-Lix Cat Treat Chicken & Zinc 5x15g",
-          "discription": "A unique, tasty treat with a soft yoghurt-like texture, perfect for daily indulgence, hiding medication, or as a food topper.",
-          "url": "https://cdn.petsathome.com/public/images/products/900_31103.jpg",
-          "catogory": "cat-treat",
-          "price": 20,
-          "rating": "4.5",
-          "qty": 1
+          "items": [
+            {
+              "id": "3",
+              "heading": "Royal Canin Veterinary Hypoallergenic Adult Dry Dog Food",
+              "discription": "Royal Canin Veterinary Hypoallergenic Adult Dry Dog Food is expertly formulated to support dogs with food sensitivities. This vet-recommended diet features hydrolyzed proteins",
+              "url": "https://cdn.petsathome.com/public/images/products/900_7103687.jpg",
+              "catogory": "dog-food",
+              "price": 20,
+              "rating": 4,
+              "qty": 1
+            }
+          ],
+          "address": {
+            "address": "njbj",
+            "city": "jbjhb",
+            "state": "bjb",
+            "zipcode": "n j",
+            "paymentMethode": "",
+            "paymentMethod": "Cash"
+          },
+          "id": 1728295837908
         }
       ],
-      "orderitems": [],
       "block": false
     },
     {
@@ -101,6 +88,51 @@
       "email": "jumail@gmail.com",
       "phonenumber": "8597652495",
       "userName": "Jumail",
+      "password": "123456",
+      "conformpassword": "123456",
+      "cart": [],
+      "orderitems": [],
+      "block": false
+    },
+    {
+      "id": "a059",
+      "fullname": "Shreeshanth",
+      "email": "shreeshanthnp@gmail.com",
+      "phonenumber": "9598653894",
+      "userName": "Shareeshanth",
+      "password": "123456",
+      "conformpassword": "123456",
+      "cart": [],
+      "orderitems": []
+    },
+    {
+      "id": "3de1",
+      "fullname": "Najhad",
+      "email": "najahad@gmail.com",
+      "phonenumber": "9586972536",
+      "userName": "Najadh",
+      "password": "123456",
+      "conformpassword": "123456",
+      "cart": [],
+      "orderitems": []
+    },
+    {
+      "id": "2c26",
+      "fullname": "Salman",
+      "email": "salman@gmail.com",
+      "phonenumber": "9265848765",
+      "userName": "Salman",
+      "password": "123456",
+      "conformpassword": "123456",
+      "cart": [],
+      "orderitems": []
+    },
+    {
+      "id": "c1b5",
+      "fullname": "Ashique",
+      "email": "Ashique@gmail.com",
+      "phonenumber": "9685652485",
+      "userName": "Ashique",
       "password": "123456",
       "conformpassword": "123456",
       "cart": [],
@@ -610,16 +642,6 @@
       "price": "2",
       "rating": "3",
       "qty": 1
-    },
-    {
-      "id": "70",
-      "heading": "Pets at Home Hillary High Sleeper Cat Activity Centre Brown",
-      "discription": "new",
-      "url": "https://cdn.petsathome.com/public/images/products/900_7143138.jpg",
-      "catogory": "cat-treat",
-      "price": "85",
-      "rating": "5",
-      "category": "cat-treat"
     }
   ]
 }

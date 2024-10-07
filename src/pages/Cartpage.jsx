@@ -16,6 +16,7 @@
       try {
         const res = await axios.get(`http://localhost:5000/users/${user}`);
         setCart(res.data.cart);
+        
       } catch  {
         console.log("Error");
       }
@@ -39,6 +40,9 @@
     } 
   };
   //.......................................................
+  
+
+
 
   const nav =useNavigate()
   const paymenthandle=()=>{

@@ -1,7 +1,62 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 export const Dashboard = () => {
+
+
+  const [totelu,setotel]=useState([])
+
+  const getusers=async()=>{
+    try{
+       const res=await axios.get("http://localhost:5000/users")
+       setotel(res.data)
+    }
+    catch{
+         console.log("Error");
+         
+    }
+
+  }
+  useEffect(()=>{
+    getusers()
+  },[])
+  const [totelp,setotelp]=useState([])
+
+  const getproducts=async()=>{
+    try{
+       const res=await axios.get("http://localhost:5000/products")
+       setotelp(res.data)
+    }
+    catch{
+         console.log("Error");
+         
+    }
+
+  }
+  useEffect(()=>{
+    getproducts()
+  },[])
+  const [totelorders,setotelorders]=useState({})
+
+  const getorders=async()=>{
+    try{
+       const res=await axios.get("http://localhost:5000/users/orderitems")
+       setotelorders(res.data)
+       console.log(res.data);
+       
+    }
+    catch{
+         console.log("Error");
+         
+    }
+
+  }
+  useEffect(()=>{
+    getorders()
+  },[])
   return (
+
+
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
       {/* Sidebar */}
       <aside className="w-full md:w-1/4 lg:w-1/5 bg-gray-500 text-white p-5 space-y-4">
@@ -46,14 +101,14 @@ export const Dashboard = () => {
 
           {/* Card 3: New Users */}
           <div className="bg-white p-6 rounded shadow text-center">
-            <h3 className="text-lg font-semibold">New Users</h3>
-            <p className="text-2xl font-bold mt-2">120</p>
+            <h3 className="text-lg font-semibold"> Totel products</h3>
+            <p className="text-2xl font-bold mt-2">{totelp.length}</p>
           </div>
 
           {/* Card 4: Pending Orders */}
           <div className="bg-white p-6 rounded shadow text-center">
-            <h3 className="text-lg font-semibold">Pending Orders</h3>
-            <p className="text-2xl font-bold mt-2">15</p>
+            <h3 className="text-lg font-semibold">totel users</h3>
+            <p className="text-2xl font-bold mt-2">{totelu.length-1}</p>
           </div>
         </div>
 

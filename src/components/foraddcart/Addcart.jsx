@@ -19,8 +19,8 @@ export const carthandle = async (product) => {
        await axios.patch(`http://localhost:5000/users/${user}`, { cart: updatedcart,
          
         });
-        // alert("Item Successfully added to the cart..!");
-        toast.success('This is a notification!');
+        alert("Item Successfully added to the cart..!");
+     
       }
     } catch {
       console.log("Error");
