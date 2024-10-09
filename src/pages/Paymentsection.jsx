@@ -19,7 +19,7 @@ const [cart, setCart] = useState([]);
       try {
         const res = await axios.get(`http://localhost:5000/users/${user}`);
         setCart(res.data.cart);
-        setOrder(res.data.orderitems)
+        setOrder(res.data.orderdetails)
       } catch  {
         console.log("Error");
       }
@@ -35,6 +35,7 @@ const [cart, setCart] = useState([]);
       paymentMethode:""
 
 
+
     })
 
     const handleChange=(e)=>{
@@ -45,14 +46,14 @@ const [cart, setCart] = useState([]);
 // clear cart , order deatails
     const clearcart = async () => {
       try {
-      await axios.patch(`http://localhost:5000/users/${user}`,{orderitems:[...order,{items:cart,address:address,id:Date.now()}]})   
-      await axios.patch(`http://localhost:5000/users/${user}`,{cart:[]})   
-      } catch (error) {
-        console.log("Error removing item", error);
+      await axios.patch(`http://localhost:5000/users/${user}`,{orderdetails:[...order,{products:cart,address:address,id:Date.now(),amount:45}]})   
+      await axios.patch(`http://localhost:5000/users/${user}`,{cart:[]})  //it for clear the cart 
+      } catch { 
+        console.log("Error");
       } 
     };
 
- const submithandle=(e)=>{
+ const submithandle=(e)=>{                                           
   e.preventDefault()
   clearcart()
   cartDisplay()

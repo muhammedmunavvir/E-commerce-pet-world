@@ -44,6 +44,7 @@ export const Userdetails = () => {
           <h1 className="text-2xl font-semibold text-gray-800">{user.fullname}</h1>
           <p className="text-gray-600 text-sm mt-1">{user.email}</p>
           <p className="text-gray-600 text-sm mt-1">{user.phonenumber}</p>
+          <p className="text-gray-600 text-sm mt-1">{user.orderdetails}</p>
          
         </div>
       </div>

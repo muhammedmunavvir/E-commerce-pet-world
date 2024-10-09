@@ -19,9 +19,11 @@ import { Dashboard } from "./admin/adminpages/Dashboard";
 import { UserList } from "./admin/adminpages/UserList";
 import { Category } from "./admin/adminpages/Category";
 import { Addcat } from "./admin/Cat.Dog/Addcat";
+import { Adddog } from "./admin/Cat.Dog/Adddog";
 import { Editing } from "./admin/adminpages/Editing";
 import { Addnewproduct } from "./admin/adminpages/Addnewproduct";
 import { Userdetails } from "./admin/adminpages/Userdetails";
+
 
 //adimin section
 
@@ -50,7 +52,8 @@ const forhide=location.pathname.startsWith("/admin")
 <Route path="/admin" element={<Adminhome/>}>
   <Route index element={<Dashboard/>}/>
   <Route path="userlist" element={<UserList/>}/>
-  <Route path="category" element={<Category/>}> <Route index element={ <Addcat/>}/> <Route path="addcat" element={ <Addcat/>}/></Route>
+  <Route path="category" element={<Category/>}> <Route index element={ <Addcat/>}/> <Route path="addcat" element={ <Addcat/>}/>   <Route path="adddog" element={<Adddog/>}/>  </Route>
+ 
   <Route path="dashboard" element={<Dashboard/>}/>
   <Route path="editing/:pID" element={<Editing/>}/>
   <Route path="addnewproduct"element={<Addnewproduct/>}/>

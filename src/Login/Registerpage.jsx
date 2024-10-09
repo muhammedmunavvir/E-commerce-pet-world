@@ -14,7 +14,7 @@ const Register = () => {
     password: "",
     conformpassword: "",
     cart:[],
-    orderitems:[]
+    orderdetails:[]
   });
 
   const [error, seterror] = useState({});

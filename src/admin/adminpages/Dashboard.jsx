@@ -36,13 +36,16 @@ export const Dashboard = () => {
   useEffect(()=>{
     getproducts()
   },[])
-  const [totelorders,setotelorders]=useState({})
+
+
+  //for lenght of totel orders,
+  const [users,setusers]=useState({})
 
   const getorders=async()=>{
     try{
-       const res=await axios.get("http://localhost:5000/users/orderitems")
-       setotelorders(res.data)
-       console.log(res.data);
+       const res=await axios.get("http://localhost:5000/users")
+     setusers(res.data)
+       
        
     }
     catch{
@@ -54,10 +57,24 @@ export const Dashboard = () => {
   useEffect(()=>{
     getorders()
   },[])
+
+  
+    
+ 
+
+
+
+ 
+  
+
+ 
   return (
 
 
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
+
+    
+     
       {/* Sidebar */}
       <aside className="w-full md:w-1/4 lg:w-1/5 bg-gray-500 text-white p-5 space-y-4">
         <h2 className="text-2xl font-semibold mb-6">Dashboard</h2>
@@ -69,7 +86,7 @@ export const Dashboard = () => {
           <a href="#" className="block px-4 py-2 rounded hover:bg-blue-500">Settings</a>
         </nav> */}
       </aside>
-
+ 
       {/* Main Content */}
       <main className="w-full md:w-3/4 lg:w-4/5 p-6 space-y-6">
         {/* Top Bar */}
@@ -90,13 +107,14 @@ export const Dashboard = () => {
           {/* Card 1: Total Sales */}
           <div className="bg-white p-6 rounded shadow text-center">
             <h3 className="text-lg font-semibold">Total Sales</h3>
-            <p className="text-2xl font-bold mt-2">$25,000</p>
+            <p className="text-2xl font-bold mt-2">{}</p>
           </div>
 
           {/* Card 2: Total Orders */}
           <div className="bg-white p-6 rounded shadow text-center">
             <h3 className="text-lg font-semibold">Total Orders</h3>
-            <p className="text-2xl font-bold mt-2">1,500</p>
+
+            <p className="text-2xl font-bold mt-2">{    }</p>
           </div>
 
           {/* Card 3: New Users */}

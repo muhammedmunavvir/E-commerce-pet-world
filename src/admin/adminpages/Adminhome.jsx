@@ -1,7 +1,40 @@
-import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 export const Adminhome = () => {
+
+  //function for accessing admin to admin page
+
+  const [user,setusers]=useState(false)
+const id=localStorage.getItem("Uid")
+   const getuser=async()=>{
+      try{
+       const res=await axios.get(`http://localhost:5000/users/${id}`)
+       if(res.data.admin) {
+        setusers(true)
+       }else{
+        setusers(false)
+       }
+  
+       
+      }
+      catch{ 
+        console.log("Error");
+        
+      }
+   }    
+useEffect(()=>{
+  getuser()
+},[])
+   
+
+if(!user){
+   return(<div><h1>Unauthrized</h1></div>)
+    
+   
+}
+
   return (
     <div className="min-h-screen flex " style={{background:"#5d6e6e"}} >
       {/* Sidebar */}
@@ -19,7 +52,7 @@ export const Adminhome = () => {
             className="px-4 py-2 rounded hover:bg-green-500 transition duration-300"
           >
             All Users
-          </NavLink>
+          </NavLink>     
           <NavLink 
             to="category" 
             className="px-4 py-2 rounded hover:bg-yellow-500 transition duration-300"
@@ -27,13 +60,13 @@ export const Adminhome = () => {
             Categories
           </NavLink>
           <NavLink 
-            to="Addproducts" 
+            to="category" 
             className="px-4 py-2 rounded hover:bg-purple-500 transition duration-300"
-          >
+          > 
             Add Products
           </NavLink>
           <NavLink 
-            to="home" 
+            to="/" 
             className="px-4 py-2 rounded hover:bg-red-500 transition duration-300"
           >
             Home

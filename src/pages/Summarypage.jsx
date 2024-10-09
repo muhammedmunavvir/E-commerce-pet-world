@@ -1,12 +1,37 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Summarypage = () => {
-  const navigate = useNavigate(); // Correctly calling useNavigate as a function
+  const navigate = useNavigate();
 
   const backclickhandle = () => {
-    navigate('/'); // Navigate to the home page on button click
+    navigate('/');
   };
+
+  const [Odetails, setOdetails] = useState([]);
+  const userId = localStorage.getItem("Uid");
+
+  const gettotel = async () => {
+    try {
+      const res = await axios.get(`http://localhost:5000/users/${userId}`);
+      setOdetails(res.data.orderdetails );
+    } catch {
+      console.log("Error");
+    }
+  };
+
+  useEffect(() => { 
+    gettotel();
+  }, []);
+
+  // Ensure there are order details before accessing them
+  const last = Odetails.length > 0 ? Odetails[Odetails.length - 1] : null;
+  const pro = last ? last.products : [];
+ 
+  // Calculate total if products are available
+  const price = pro ? pro.map((item) => item.price * item.qty) : [];
+  const total = price.reduce((acc, cur) => acc + cur, 0);
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
@@ -43,11 +68,11 @@ const Summarypage = () => {
         <ul className="space-y-2">
           <li className="flex justify-between">
             <span className="text-gray-700">Order Number:</span>
-            <span className="font-semibold text-gray-800">#123456</span>
+            <span className="font-semibold text-gray-800">#{last?last.id:null}</span>
           </li>
           <li className="flex justify-between">
             <span className="text-gray-700">Total Amount:</span>
-            <span className="font-semibold text-gray-800">totel amout{}</span>
+            <span className="font-semibold text-gray-800">${total}</span> {/* Updated here */}
           </li>
         </ul>
       </div>
@@ -56,7 +81,7 @@ const Summarypage = () => {
       <div className="text-center mt-8">
         <button
           className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
-          onClick={backclickhandle} // Call the backclickhandle function on button click
+          onClick={backclickhandle}
         >
           Back to Home
         </button>
