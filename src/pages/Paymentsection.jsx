@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 // import Cartpage from './Cartpage';  // Import the Cartpage component
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -25,6 +25,11 @@ const [cart, setCart] = useState([]);
       }
     };
 
+    // total amount
+
+    const a=cart.map((item)=>item.price*item.qty);
+    let totalA=a.reduce((acc,cur)=>acc+=cur,0);
+
     // adrres
 
     const [address,setAddress]=useState({
@@ -42,11 +47,14 @@ const [cart, setCart] = useState([]);
       const {value,name}=e.target;
 
       setAddress({...address,[name]:value})
+
     }
+
+                   
 // clear cart , order deatails
     const clearcart = async () => {
       try {
-      await axios.patch(`http://localhost:5000/users/${user}`,{orderdetails:[...order,{products:cart,address:address,id:Date.now(),amount:45}]})   
+      await axios.patch(`http://localhost:5000/users/${user}`,{orderdetails:[...order,{products:cart,address:address,id:Date.now(),amount:totalA}]})   
       await axios.patch(`http://localhost:5000/users/${user}`,{cart:[]})  //it for clear the cart 
       } catch { 
         console.log("Error");

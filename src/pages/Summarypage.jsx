@@ -33,6 +33,8 @@ const Summarypage = () => {
   const price = pro ? pro.map((item) => item.price * item.qty) : [];
   const total = price.reduce((acc, cur) => acc + cur, 0);
 
+
+
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
       {/* Confirmation Message */}
@@ -72,7 +74,7 @@ const Summarypage = () => {
           </li>
           <li className="flex justify-between">
             <span className="text-gray-700">Total Amount:</span>
-            <span className="font-semibold text-gray-800">${total}</span> {/* Updated here */}
+            <span className="font-semibold text-gray-800">${total}</span> 
           </li>
         </ul>
       </div>

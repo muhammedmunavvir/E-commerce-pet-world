@@ -38,15 +38,14 @@ export const Dashboard = () => {
   },[])
 
 
-  //for lenght of totel orders,
-  const [users,setusers]=useState({})
+ // for lenght of totel orders,
+  const [users,setusers]=useState([])
 
   const getorders=async()=>{
     try{
        const res=await axios.get("http://localhost:5000/users")
      setusers(res.data)
-       
-       
+    
     }
     catch{
          console.log("Error");
@@ -58,10 +57,24 @@ export const Dashboard = () => {
     getorders()
   },[])
 
-  
-    
- 
+// const a=users.map((item)=>item.orderdetails)
 
+// const b=a.map((item)=>item.amount);
+// console.log(b);
+  
+
+// profit
+
+// const profit = users.filter((user) => user.orderdetails && Object.keys(user.orderdetails).length>0)
+// const val=profit.filter((item)=>item.orderdetails.Amount);
+
+// const sum=val.reduce((acc,cur)=>{
+//   return acc+=cur;
+// },0);
+
+// console.log(sum);
+
+ 
 
 
  
@@ -72,7 +85,7 @@ export const Dashboard = () => {
 
 
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
-
+   
     
      
       {/* Sidebar */}
@@ -114,7 +127,7 @@ export const Dashboard = () => {
           <div className="bg-white p-6 rounded shadow text-center">
             <h3 className="text-lg font-semibold">Total Orders</h3>
 
-            <p className="text-2xl font-bold mt-2">{    }</p>
+            {/* <p className="text-2xl font-bold mt-2">{  totalOrders  }</p> */}
           </div>
 
           {/* Card 3: New Users */}

@@ -45,7 +45,7 @@ export const Prodectgrid = () => {
             <div 
               onClick={() => fordetails(obj.id)} 
               key={obj.id} 
-              className=" rounded-lg shadow-xl overflow-hidden transform transition-transform hover:scale-105 hover:shadow-xl cursor-pointer w-full max-w-sm">
+              className="rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl cursor-pointer w-full max-w-sm">
               
               <img 
                 src={obj.url} 

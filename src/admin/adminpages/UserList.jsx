@@ -23,6 +23,7 @@ export const UserList = () => {
     getuser()
   },[])
 
+  const fuser = users.filter((user) => user.id === user.id && !user.admin);
 
 const nav =useNavigate()
   const  viewuser=(id)=>{
@@ -87,7 +88,7 @@ const unblockhandle=async(id)=>{
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {fuser.map((user) => (
                 <tr key={user.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-b">
                     {user.userName}
