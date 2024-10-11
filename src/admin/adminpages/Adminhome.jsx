@@ -30,7 +30,7 @@ useEffect(()=>{
    
 
 if(!user){
-   return(<div><h1>Unauthrized</h1></div>)
+   return(<div><h1>not accessible</h1></div>)
     
    
 }
@@ -76,14 +76,24 @@ if(!user){
 
       {/* Main Content */}
       <main className="flex-1 p-8">
-        <header className="bg-white rounded-lg shadow p-6 mb-8">
-          <h2 className="text-2xl font-semibold">Welcome to the Admin Panel</h2>
-          <p className="mt-2 text-gray-600">Manage your application efficiently.</p>
-        </header>
-        <div className="bg-white rounded-lg shadow p-6">
-          <Outlet/>
-        </div>
-      </main>
+  <header
+    className="rounded-lg shadow p-6 mb-8"
+    style={{
+      backgroundImage: 'url("https://media.istockphoto.com/id/1311598658/photo/businessman-trading-online-stock-market-on-teblet-screen-digital-investment-concept.jpg?s=1024x1024&w=is&k=20&c=JZprgGDQ8xqa6iu0fyKJfKOlAvae0w9U-AdHeCT2kg4=")', // Replace with your image URL
+      backgroundSize: 'cover', // Makes the image cover the entire header area
+      backgroundPosition: 'center', // Centers the image
+      height: '200px', // Set a specific height for the header
+      color: 'white', // Change text color if necessary to ensure readability
+    }}
+  >
+    <h2 className="text-2xl font-semibold">Welcome to the Admin Panel</h2>
+    <p className="mt-2 text-gray-200">Manage your application efficiently.</p> {/* Adjust text color as needed */}
+  </header>
+  <div className="bg-white rounded-lg shadow p-6">
+    <Outlet />
+  </div>
+</main>
+
     </div>
   );
 };
