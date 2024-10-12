@@ -115,7 +115,7 @@
       "conformpassword": "123456",
       "cart": [],
       "orderdetails": [],
-      "block": true
+      "block": false
     },
     {
       "id": "2b29",
@@ -127,7 +127,7 @@
       "conformpassword": "123456",
       "cart": [],
       "orderdetails": [],
-      "block": true
+      "block": false
     },
     {
       "id": "1ccd",
@@ -139,7 +139,7 @@
       "conformpassword": "123456",
       "cart": [],
       "orderdetails": [],
-      "block": true
+      "block": false
     },
     {
       "id": "18b2",
@@ -151,7 +151,91 @@
       "conformpassword": "123456",
       "cart": [],
       "orderdetails": [],
-      "block": true
+      "block": false
+    },
+    {
+      "id": "0c42",
+      "fullname": "Shanoof",
+      "email": "shanoof@gmail.com",
+      "phonenumber": "859298645",
+      "userName": "Shanoof",
+      "password": "123456",
+      "conformpassword": "123456",
+      "cart": [],
+      "orderdetails": [
+        {
+          "products": [
+            {
+              "id": "21",
+              "heading": "Felix Wet Cat Food Favourites Selection In Jelly 88x100g",
+              "discription": "Balanced, complete nutrition satisfying 100% daily needs, enriched with vitamins D, E, and essential minerals for optimal health.",
+              "url": "https://cdn.petsathome.com/public/images/products/900_30851.jpg",
+              "catogory": "cat-food",
+              "price": "28",
+              "rating": "4.4",
+              "qty": 4,
+              "category": "cat-food",
+              "description": "3rd edit"
+            }
+          ],
+          "address": {
+            "address": "shanoof123@gmail.com",
+            "city": "kottakkal",
+            "state": "kerala",
+            "zipcode": "676508",
+            "paymentMethode": "",
+            "paymentMethod": "Card"
+          },
+          "id": 1728626381727,
+          "amount": 112
+        },
+        {
+          "products": [
+            {
+              "id": "23",
+              "heading": "Whiskas 1+ Adult Wet Cat Food Poultry In Jelly 80x85g",
+              "discription": "High-quality, nutritious wet food for adult cats, supporting muscle strength, natural defences, and a healthy skin and coat.",
+              "url": "https://cdn.petsathome.com/public/images/products/900_7147090.jpg",
+              "catogory": "cat-food",
+              "price": 25,
+              "rating": "4.5",
+              "qty": 1
+            }
+          ],
+          "address": {
+            "address": "njbj",
+            "city": "jbjhb",
+            "state": "bjb",
+            "zipcode": "N J",
+            "paymentMethode": "",
+            "paymentMethod": "Cash"
+          },
+          "id": 1728716913545,
+          "amount": 25
+        }
+      ]
+    },
+    {
+      "id": "f672",
+      "fullname": "ashkar",
+      "email": "ashkar@gmail.com",
+      "phonenumber": "8595986525",
+      "userName": "ashkar",
+      "password": "123456",
+      "conformpassword": "123456",
+      "cart": [],
+      "orderdetails": []
+    },
+    {
+      "id": "8233",
+      "fullname": "murshidha k",
+      "email": "murshidhakoottery@gmail.com",
+      "phonenumber": "9188055290",
+      "userName": "murshidahyusuf",
+      "password": "8592980406",
+      "conformpassword": "8592980406",
+      "cart": [],
+      "orderdetails": []
     }
   ],
   "products": [
@@ -331,7 +415,7 @@
       "discription": "Balanced, complete nutrition satisfying 100% daily needs, enriched with vitamins D, E, and essential minerals for optimal health.",
       "url": "https://cdn.petsathome.com/public/images/products/900_30851.jpg",
       "catogory": "cat-food",
-      "price": "28",
+      "price": "20",
       "rating": "4.4",
       "qty": 1,
       "category": "cat-food",
@@ -645,16 +729,6 @@
       "catogory": "cat-treat",
       "price": "5",
       "rating": "4.2",
-      "qty": 1
-    },
-    {
-      "id": "60",
-      "heading": "Dreamies Mix Cat Treat Biscuits with Chicken & Duck 60g",
-      "discription": "Your cat will enjoy these dual-flavoured, crunchy yet soft treats, packed with vitamins, minerals, and just 2 kcal each in a resealable bag",
-      "url": "https://cdn.petsathome.com/public/images/products/900_30967.jpg",
-      "catogory": "cat-treat",
-      "price": "2",
-      "rating": "3",
       "qty": 1
     }
   ]

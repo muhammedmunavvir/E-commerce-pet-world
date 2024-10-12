@@ -8,6 +8,8 @@ export const Adminhome = () => {
 
   const [user,setusers]=useState(false)
 const id=localStorage.getItem("Uid")
+
+const nav=useNavigate()
    const getuser=async()=>{
       try{
        const res=await axios.get(`http://localhost:5000/users/${id}`)
@@ -30,10 +32,22 @@ useEffect(()=>{
    
 
 if(!user){
-   return(<div><h1>not accessible</h1></div>)
+   return(<div><h1>Not accessible</h1></div>)
     
    
 }
+
+
+
+const logout=()=>{
+    localStorage.removeItem("Uid")
+    localStorage.removeItem("name")
+    localStorage.removeItem("userEmail")
+    localStorage.removeItem("admin")
+nav("/")
+
+}
+
 
   return (
     <div className="min-h-screen flex " style={{background:"#5d6e6e"}} >
@@ -57,20 +71,16 @@ if(!user){
             to="category" 
             className="px-4 py-2 rounded hover:bg-yellow-500 transition duration-300"
           >
-            Categories
+           All products
           </NavLink>
-          <NavLink 
-            to="addnewproduct" 
+          <button
+          onClick={logout} 
+        
             className="px-4 py-2 rounded hover:bg-purple-500 transition duration-300"
           > 
-            Add Products
-          </NavLink>
-          <NavLink 
-            to="/" 
-            className="px-4 py-2 rounded hover:bg-red-500 transition duration-300"
-          >
-            Home
-          </NavLink>
+          Logout
+          </button>
+         
         </nav>
       </aside>
 

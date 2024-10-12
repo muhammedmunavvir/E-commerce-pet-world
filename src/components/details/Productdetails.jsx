@@ -34,7 +34,7 @@ const Productdetails = () => {
   const tocart = async (product) => {
     const userLoggedIn = localStorage.getItem('Uid') && localStorage.getItem('userEmail');
     
-    if (userLoggedIn) {
+    if (userLoggedIn) {        // if true  product will add to cart    
       await carthandle(product);
     } else {
      

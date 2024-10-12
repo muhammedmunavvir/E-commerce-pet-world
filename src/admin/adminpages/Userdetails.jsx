@@ -46,7 +46,7 @@ export const Userdetails = () => {
           <p className="text-gray-600 text-sm mt-1">{user.phonenumber}</p>
          
         </div>
-      </div>
+      </div> 
     ))}
   </div>
 </div>

@@ -69,7 +69,7 @@ export const Navbar = () => {
     getcart()
     localStorage.removeItem('name')
 
-   window.confirm("Are you sure you want to logout?")
+  
  
      nav("/")
   }
@@ -77,7 +77,7 @@ export const Navbar = () => {
   //user name
   const uName=localStorage.getItem("name")
 
-
+ 
 
 
   return (
