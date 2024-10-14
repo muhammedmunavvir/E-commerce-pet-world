@@ -56,7 +56,7 @@ nav("/")
         <h1 className="text-3xl font-bold mb-6 text-center">Admin Panel</h1>
         <nav className="flex flex-col space-y-4">
           <NavLink 
-            to="dashboard" 
+            to="dashboard"  
             className="px-4 py-2 rounded hover:bg-blue-500 transition duration-300"
           >
             Dashboard
