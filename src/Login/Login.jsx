@@ -4,6 +4,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
  
 
 const Login = () => {
@@ -69,7 +70,10 @@ const Login = () => {
       }else{
         localStorage.setItem("name",user.userName)
       localStorage.setItem("Uid",user.id)
+     
       navigate('/'); 
+     toast.success("Login Successfully ")
+    
       }
     }
   };

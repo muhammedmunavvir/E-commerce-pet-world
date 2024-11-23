@@ -1,5 +1,5 @@
 
-import {toaster,toast} from 'sonner'
+import { toast } from "react-toastify";
 import axios from "axios";
 
 
@@ -13,13 +13,13 @@ export const carthandle = async (product) => {
 
       const exist = currentcart.find((cart) => product.id === cart.id);
       if (exist) {
-        alert("This Item already in your cart ");
+        toast.info("This item is already in your cart");
       } else {
         const updatedcart = [...currentcart, product];
        await axios.patch(`http://localhost:5000/users/${user}`, { cart: updatedcart,
          
         });
-        alert("Item Successfully added to the cart..!");
+      toast.success("Item Successfully added to the cart..!")
      
       }
     } catch {

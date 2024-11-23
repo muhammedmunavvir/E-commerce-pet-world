@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export const Addcat = () => {
 
@@ -40,6 +41,7 @@ const deletehandle=async(prod)=>{
   try{
    await axios.delete(`http://localhost:5000/products/${prod.id}`)
    getcat()
+   toast.warning("Item deleted")
   }
   catch{
     console.log("Error");

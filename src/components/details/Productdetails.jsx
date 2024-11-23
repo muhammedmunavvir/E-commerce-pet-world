@@ -5,7 +5,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { carthandle } from '../foraddcart/Addcart';
-
+import { toast } from 'react-toastify';
 
 const Productdetails = () => {
   const { id } = useParams();
@@ -38,7 +38,7 @@ const Productdetails = () => {
       await carthandle(product);
     } else {
      
-      alert("you want to login to add product")
+    toast.warning("Please log in to add a product")
       navigate("/login");
     }
   };

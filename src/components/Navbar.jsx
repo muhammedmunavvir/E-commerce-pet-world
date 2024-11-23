@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const Navbar = () => {
   const [searchitem, setsearchitem] = useState("");
@@ -70,7 +71,7 @@ export const Navbar = () => {
     localStorage.removeItem('name')
 
   
- 
+    toast.info("You have been logged out.");
      nav("/")
   }
 

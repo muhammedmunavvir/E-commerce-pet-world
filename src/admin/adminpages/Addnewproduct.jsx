@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-
+import { toast } from 'react-toastify'
 export const Addnewproduct = () => {
 
     const [product,setproduct]=useState({
@@ -26,7 +26,7 @@ export const Addnewproduct = () => {
         e.preventDefault()
         try{
           await  axios.post(`http://localhost:5000/products`,product)
-          alert("product add succseesfully!")
+         toast.success("product add succseesfully!")
           navigate("/admin/category/addcat")
 
         } 

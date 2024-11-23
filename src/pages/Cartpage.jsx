@@ -3,6 +3,7 @@
   import axios from 'axios';
   import React, { useEffect, useState } from 'react';
   import { useNavigate } from 'react-router-dom';
+  import { toast } from 'react-toastify';
 
   const Cartpage = () => {
     const [cart, setCart] = useState([]);
@@ -30,6 +31,7 @@
       const updatedCart = cart.filter(item => item.id !== product.id);
       // the product id check to item id . and exclude matching product .  and return new arrAY TO updatecart.
       // it only remove from display
+      toast.warning("Item removed from your cart")
 
       setCart(updatedCart); // Update cart in state
 
@@ -69,48 +71,50 @@
    }
 
 
-  return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+   return (
+    <div className="container mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Your Cart</h1>
       {cart.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {cart.map((product) => (
-            <div key={product.id} className="border rounded-lg shadow-md p-4 flex flex-col items-center">
-             <img src={product.url} alt={product.name} className="w-32 h-32 object-cover mb-2 rounded" />
-
-              <h2 className="text-lg font-semibold">{product.name}</h2>
-              <p className="text-gray-600">Price: ${product.price*product.qty}</p>
-              <button
-                className="mt-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
-                onClick={() => removeitem(product)}
-              >
-                Remove from Cart
-              </button>
-              <div className="flex items-center space-x-4">
-  <button 
-    onClick={() => inc(product.id)} 
-    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+            <div
+              key={product.id}
+              className="border rounded-lg shadow-lg p-6 flex flex-col items-center bg-white hover:shadow-xl transition-shadow duration-300"
+            >
+              <img
+                src={product.url}
+                alt={product.name}
+                className="w-36 h-36 object-cover mb-4 rounded-lg shadow-md"
+              />
+              <h2 className="text-xl font-semibold text-gray-800">{product.name}</h2>
+              <p className="text-gray-600 text-sm mt-2">Price: ${product.price * product.qty}</p>
+              <div className="flex items-center space-x-4 mt-4">
+  <button
+    onClick={() => inc(product.id)}
+    className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200"
   >
     +
   </button>
-  <h3 className="text-lg font-semibold">{product.qty}</h3>
-  <button 
-    onClick={() => dec(product.id)} 
-    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition duration-300"
+  <h3 className="text-xl font-semibold text-gray-800">{product.qty}</h3>
+  <button
+    onClick={() => dec(product.id)}
+    className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200"
   >
     -
   </button>
 </div>
 
-
-
-
+              <button
+                className="mt-4 w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-300"
+                onClick={() => removeitem(product)}
+              >
+                Remove from Cart
+              </button>
             </div>
           ))}
-          {/* Centering the button within the grid */}
-          <div className="col-span-1 sm:col-span-2 lg:col-span-3 flex justify-center mt-4">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-3 flex justify-center mt-6">
             <button
-              className="w-full max-w-md px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 transition duration-300"
+              className="w-full max-w-lg px-6 py-3 bg-green-600 text-white text-lg font-semibold rounded-lg hover:bg-green-700 transition duration-300"
               onClick={paymenthandle}
             >
               Proceed to Payment
@@ -118,10 +122,11 @@
           </div>
         </div>
       ) : (
-        <p className="text-lg text-gray-600">No items in the cart.</p>
+        <p className="text-lg text-center text-gray-600">No items in the cart.</p>
       )}
     </div>
   );
+  
 };
 
 export default Cartpage;

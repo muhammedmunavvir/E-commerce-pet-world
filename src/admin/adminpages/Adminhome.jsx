@@ -74,12 +74,12 @@ nav("/")
            All products
           </NavLink>
           <button
-          onClick={logout} 
-        
-            className="px-4 py-2 rounded hover:bg-purple-500 transition duration-300"
-          > 
-          Logout
-          </button>
+  onClick={logout}
+  className="self-start px-4 py-2 rounded hover:bg-purple-500 transition duration-300"
+>
+  Logout
+</button>
+
          
         </nav>
       </aside>
