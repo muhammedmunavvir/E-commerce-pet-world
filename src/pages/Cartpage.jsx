@@ -9,9 +9,7 @@
     const [cart, setCart] = useState([]);
     const user = localStorage.getItem("Uid");
 
-    useEffect(() => {
-      cartDisplay();
-    }, [cart]);
+   
 
     const cartDisplay = async () => {
       try {
@@ -20,8 +18,12 @@
         
       } catch  {
         console.log("Error");
-      }
+      } 
     };
+
+    useEffect(() => {
+      cartDisplay();
+    }, []);
 
   //...................................
 
@@ -29,18 +31,25 @@
     try {
       
       const updatedCart = cart.filter(item => item.id !== product.id);
+      await axios.patch(`http://localhost:5000/users/${user}`,{cart:updatedCart}) // Update cart in  backend
+     
+      setCart(updatedCart); // Update state only after backend update 
+      cartDisplay();
       // the product id check to item id . and exclude matching product .  and return new arrAY TO updatecart.
       // it only remove from display
       toast.warning("Item removed from your cart")
-
-      setCart(updatedCart); // Update cart in state
-
-      // Update cart in  backend
-    await axios.patch(`http://localhost:5000/users/${user}`,{cart:updatedCart})   
+      cartDisplay();
+      // setCart(updatedCart); // Update cart in state
+      
+    
+   
     } catch (error) {
       console.log("Error removing item", error);
     } 
   };
+
+ 
+  
   //.......................................................
   
 

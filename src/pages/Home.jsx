@@ -6,6 +6,8 @@ import { Prodectgrid } from '../components/Prodectgrid';
 
 const HomePage = () => {
 
+  console.log("hello world");
+
   return (
 
     < >

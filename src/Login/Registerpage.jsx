@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 const Register = () => {
   const [user, setuser] = useState({
     fullname: "",
@@ -86,7 +86,7 @@ setData(res.data)
       }else{
         try {
           const res = await axios.post("http://localhost:5000/users", user);
-          alert("Registration successful!"); 
+         toast.success("Registration successful!"); 
     
           nav("/login")
   

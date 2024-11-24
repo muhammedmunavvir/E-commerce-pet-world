@@ -23,7 +23,7 @@ export const Heropage = () => {
         </div>
 
         {/* Image Section */}
-        <div className="w-full lg:w-1/2 flex justify-center relative mt-8 lg:mt-0 ">
+        <div className="hidden lg:flex w-1/2 lg:w-1/2 justify-center relative mt-8 lg:mt-0 ">
           <div className="relative w-full lg:w-4/5">
           <img
               src="https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"

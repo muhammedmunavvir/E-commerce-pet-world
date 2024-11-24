@@ -63,7 +63,7 @@ export const Navbar = () => {
   useEffect(()=>{
      
      getcart()
-  },[cart,userid])
+  },[])
 
   function logout(){
     localStorage.removeItem('Uid')

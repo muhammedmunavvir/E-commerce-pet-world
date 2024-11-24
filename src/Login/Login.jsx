@@ -18,15 +18,17 @@ const Login = () => {
   const navigate = useNavigate();  
 
 
+  const fetchData = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/users");
+      setData(res.data);
+      console.log("users");
+    } catch  {
+      console.log("Error");
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/users");
-        setData(res.data);
-      } catch  {
-        console.log("Error");
-      }
-    };
     fetchData();
   }, []);
 
