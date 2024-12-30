@@ -8,7 +8,7 @@ const Dog = () => {
  useEffect(()=>{
      const  getdog= async() => {
         try{
-            const res=await axios.get("http://localhost:5000/products")
+            const res=await axios.get("http://localhost:8080/products")
             setstate(res.data)
         } 
         catch{
@@ -25,7 +25,7 @@ const Dog = () => {
  }
 
 
- const dog=state.filter((item)=>item.catogory==="dog-food"||item.catogory=="dog-beds")
+ const dog=state.filter((item)=>item.catogory==="dog-food"||item.catogory==="dog-beds")
   return (
     <div className="flex flex-wrap justify-center p-4">
     {dog.map((obj) => (

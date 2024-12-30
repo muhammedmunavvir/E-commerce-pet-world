@@ -15,9 +15,11 @@ export const Prodectgrid = () => {
   useEffect(() => {
     const getproduct = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/products");
+        const res = await axios.get("http://localhost:8080/products/featured");
+        
+        
+        getfeaturedproducts(res.data.data);
        
-        getfeaturedproducts(res.data);
       } catch {
         console.log("error fetching products");
       }
@@ -26,7 +28,7 @@ export const Prodectgrid = () => {
     getproduct();
   }, []);
 
-  const featured = featuredproducts.filter((item) => item.rating > 4.4);
+  // const featured = featuredproducts.filter((item) => item.rating > 4.4);
 
   const nav=useNavigate()
   const fordetails=(id)=>{
@@ -41,7 +43,7 @@ export const Prodectgrid = () => {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {
-          featured.map((obj) => (
+          featuredproducts.map((obj) => (
             <div 
               onClick={() => fordetails(obj.id)} 
               key={obj.id} 

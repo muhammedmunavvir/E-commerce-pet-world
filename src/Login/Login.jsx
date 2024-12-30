@@ -1,81 +1,47 @@
-
-
-
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
- 
+import axios from "axios";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const initialVal = {
     email: "",
-    password: ""
+    password: "",
   };
   const [values, setValues] = useState(initialVal);
-  const [data, setData] = useState([]); 
-  const [error, setError] = useState({});
-  const navigate = useNavigate();  
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-
-  const fetchData = async () => {
-    try {
-      const res = await axios.get("http://localhost:5000/users");
-      setData(res.data);
-      console.log("users");
-    } catch  {
-      console.log("Error");
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
- 
   const inputHandle = (e) => {
     const { name, value } = e.target;
-    setValues({...values,[name]: value  
-      
-      
-    });
+    setValues({ ...values, [name]: value });
   };
 
- 
-  const validateLogin = () => {
-    const errors = {};
-    const match = data.find(user => user.email === values.email && user.password === values.password);
-    
-    if (!match) {
-      errors.info = "Incorrect email or password";
-    }
-    
-   
-    
-    setError(errors);
-    return Object.keys(errors).length === 0;  
-  };
-     
-
-  const toHomepage = (e) => {
+  // Handle form submission
+  const toHomepage = async (e) => {
     e.preventDefault();
-    const user=data.find((user)=>user.email===values.email)  
-   
-    if (validateLogin()) {
-      if(user.admin){
-        localStorage.setItem("name",user.userName)
-        localStorage.setItem("Uid",user.id)
-        localStorage.setItem("admin",true)
-        navigate("/admin")
-      }else if(user.block===true){
-        alert("your account is blocked")
-      }else{
-        localStorage.setItem("name",user.userName)
-      localStorage.setItem("Uid",user.id)
-     
-      navigate('/'); 
-     toast.success("Login Successfully ")
-    
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/auth/login",
+        values
+      );
+      console.log(response);
+
+      if (response.data.status === "success") {
+        toast.success("Login Successfully");
+
+        navigate("/");
+      }
+
+      //   else if(error.response.data.status==="error") {
+      // setError(error.response.response.data.message || "Invalid credentials");
+      // // toast.error(response.response.data.message);
+
+      //   }
+    } catch (error) {
+      console.log("catch block", error);
+      if (error.response.data.status === "error") {
+        setError(error.response.data.message);
       }
     }
   };
@@ -83,10 +49,15 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-purple-500 to-blue-500">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-sm w-full">
-        <h2 className="text-2xl font-bold text-center text-gray-700">Login to Your Account</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-700">
+          Login to Your Account
+        </h2>
         <form className="mt-4" onSubmit={toHomepage}>
           <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-semibold mb-2" htmlFor="email">
+            <label
+              className="block text-gray-600 text-sm font-semibold mb-2"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
@@ -101,7 +72,10 @@ const Login = () => {
             />
           </div>
           <div className="mb-6">
-            <label className="block text-gray-600 text-sm font-semibold mb-2" htmlFor="password">
+            <label
+              className="block text-gray-600 text-sm font-semibold mb-2"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -115,7 +89,7 @@ const Login = () => {
               required
             />
           </div>
-          {error.info && <p className="text-red-500 text-center">{error.info}</p>}
+          {error && <p className="text-red-500 text-center">{error}</p>}
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition duration-200"
@@ -124,7 +98,7 @@ const Login = () => {
           </button>
         </form>
         <p className="mt-4 text-center text-gray-600">
-          Don't have an account?{' '}
+          Don't have an account?{" "}
           <NavLink to="/registerpage" className="text-blue-500 hover:underline">
             Register here
           </NavLink>

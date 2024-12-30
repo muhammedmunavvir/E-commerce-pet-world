@@ -5,15 +5,18 @@ import { useNavigate } from 'react-router-dom';
 export const Allproducts = () => {
   const [products, allproducts] = useState([]);
 
+  
+  
   useEffect(() => {
     const getproduct = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/products");
-        allproducts(res.data);
+        const res = await axios.get("http://localhost:8080/products/all");
+        // console.log(res.data)
+        allproducts(res.data.data);
       } catch {
         console.log("error");
       }
-    };
+    }; 
     getproduct();
   }, []);
 
@@ -28,7 +31,7 @@ export const Allproducts = () => {
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-3xl font-bold text-center mb-8">Our Products</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {products.map((obj) => (
+        {products && products.map((obj) => (
           
           <div  onClick={()=>fordetails(obj.id)} key={obj.id} className="bg-white rounded-lg shadow-md p-4 transition-transform hover:scale-105">
             <img
