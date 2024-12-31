@@ -11,9 +11,9 @@ import Productdetails from "./components/details/Productdetails";
 import Cartpage from "./pages/Cartpage";
 import Paymentsection from "./pages/Paymentsection";
 import Summarypage from "./pages/Summarypage";
-import Cat from "./components/cat/Cat";
-import Dog from "./components/dog/Dog";
 
+
+ 
 import { Adminhome } from "./admin/adminpages/Adminhome";
 import { Dashboard } from "./admin/adminpages/Dashboard";
 import { UserList } from "./admin/adminpages/UserList";
@@ -23,6 +23,7 @@ import { Adddog } from "./admin/Cat.Dog/Adddog";
 import { Editing } from "./admin/adminpages/Editing";
 import { Addnewproduct } from "./admin/adminpages/Addnewproduct";
 import { Userdetails } from "./admin/adminpages/Userdetails";
+import Categorypage from "./pages/Categorypage";
 
 
 //adimin section
@@ -39,10 +40,9 @@ const forhide=location.pathname.startsWith("/admin")
  <Route path="/login" element={<Login/>} />
  <Route path="/registerpage" element={<Register/>}/>
  <Route path="/Allproducts" element={<Allproducts/>}/>
- <Route path="/catproducts" element={<Cat/>}/>
- <Route path="/dogproducts" element={<Dog/>}/>
+ <Route path="/products/:category" element={<Categorypage/>}/>
  <Route path="/productdetails/:id" element={<Productdetails/>}/>
- <Route path="/cartpage" element={<Cartpage/>}/>
+ <Route path="/cartpage" element={<Cartpage/>}/> 
  <Route path="/payment" element={<Paymentsection/>}/>
  <Route path="/ordersum" element={<Summarypage/>}/>
  

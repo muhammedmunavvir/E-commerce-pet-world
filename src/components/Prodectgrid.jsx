@@ -16,22 +16,23 @@ export const Prodectgrid = () => {
     const getproduct = async () => {
       try {
         const res = await axios.get("http://localhost:8080/products/featured");
-        
+        // const {productID}=res.data.data._id
+        console.log(res.data._id)
         
         getfeaturedproducts(res.data.data);
        
-      } catch {
-        console.log("error fetching products");
+      } catch (error){
+        console.log("error fetching products",error);
       }
     };
-
+ 
     getproduct();
   }, []);
 
   // const featured = featuredproducts.filter((item) => item.rating > 4.4);
 
   const nav=useNavigate()
-  const fordetails=(id)=>{
+  const    fordetails=(id)=>{
    
       nav(`/Productdetails/${id}`) 
   }
@@ -45,7 +46,7 @@ export const Prodectgrid = () => {
         {
           featuredproducts.map((obj) => (
             <div 
-              onClick={() => fordetails(obj.id)} 
+              onClick={() => fordetails(obj._id)} 
               key={obj.id} 
               className="rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl cursor-pointer w-full max-w-sm">
               

@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { carthandle } from "../foraddcart/Addcart";
-import { useNavigate } from "react-router-dom";
-const Cat = () => {
+
+const Categorypage = () => {
+  const { category } = useParams();
+  console.log("use params", useParams);
+  console.log("catrgooooory", category);
   const [state, setstate] = useState([]);
 
-  const getcat = async () => {
-    try {
-      const res = await axios.get("http://localhost:5000/products");
-      setstate(res.data);
-    } catch {}
-  };
-
   useEffect(() => {
-    getcat();
+    const getdogproduct = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8080/products/category?category=${category}`
+        );
+        console.log("res", res);
+        setstate(res.data.data);
+        console.log("state................", state);
+      } catch (error) {
+        console.log("dog page", error);
+      }
+    };
+    getdogproduct();
   }, []);
 
   const nav = useNavigate();
@@ -21,13 +29,9 @@ const Cat = () => {
     nav(`/productdetails/${id}`);
   }
 
-  const cat = state.filter(
-    (item) => item.catogory === "cat-food" || item.catogory === "cat-treat"
-  );
-
   return (
     <div className="flex flex-wrap justify-center p-4">
-      {cat.map((obj) => (
+      {state.map((obj) => (
         <div
           key={obj.id}
           className="m-2 max-w-xs bg-white rounded-lg shadow-lg overflow-hidden"
@@ -49,4 +53,4 @@ const Cat = () => {
   );
 };
 
-export default Cat;
+export default Categorypage;

@@ -59,7 +59,7 @@ export const Heropage = () => {
               className="w-40 h-40 object-cover rounded-full mb-4"
             />
             <h3 className="text-xl font-semibold mb-2">Dog Products</h3>
-            <NavLink to="/dogproducts" className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition duration-300">
+            <NavLink to="/products/dog-food" className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition duration-300">
               Shop Now
             </NavLink>
           </div>
@@ -72,7 +72,7 @@ export const Heropage = () => {
               className="w-40 h-40 object-cover rounded-full mb-4"
             />
             <h3 className="text-xl font-semibold mb-2">Cat Products</h3>
-            <NavLink to="/catproducts" className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition duration-300">
+            <NavLink to="/products/cat-food" className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition duration-300">
               Shop Now
             </NavLink>
           </div>
