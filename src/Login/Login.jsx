@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = "http://localhost:8080";
+
 const Login = () => {
   const initialVal = {
     email: "",
@@ -23,21 +26,30 @@ const Login = () => {
     try {
       const response = await axios.post(
         "http://localhost:8080/auth/login",
-        values
+        values,
+        { withCredentials: true }
       );
-      console.log(response);
-
+      console.log("user from backend", response);
+      const _id = response.data.user._id;
+      const user=response.data.user
+      console.log("user role",user)
+      
+      const username = response.data.user.username;
       if (response.data.status === "success") {
+        localStorage.setItem("userId", _id);
+        localStorage.setItem("username", username);
+    
+
         toast.success("Login Successfully");
 
-        navigate("/");
+      
+
+        if(user.role==="admin"){
+          navigate("/admin")
+        }else{
+          navigate("/")
+        }
       }
-
-      //   else if(error.response.data.status==="error") {
-      // setError(error.response.response.data.message || "Invalid credentials");
-      // // toast.error(response.response.data.message);
-
-      //   }
     } catch (error) {
       console.log("catch block", error);
       if (error.response.data.status === "error") {

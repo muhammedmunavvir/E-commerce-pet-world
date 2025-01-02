@@ -4,12 +4,13 @@ import React, { useEffect, useState } from 'react';
 export const Dashboard = () => {
   const [totelu, setotel] = useState([]);
   const [totelp, setotelp] = useState([]);
+  const [totalRevenue,setrevenue]=useState([])
   const [totalOrders, setTotalOrders] = useState(0);
 
   const getusers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/users");
-      setotel(res.data);
+      const res = await axios.get("http://localhost:8080/admin/allusers");
+      setotel(res.data.users);
     } catch {
       console.log("Error fetching users");
     }
@@ -17,31 +18,47 @@ export const Dashboard = () => {
 
   const getproducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/products");
-      setotelp(res.data);
-    } catch {
-      console.log("Error fetching products");
+      const res = await axios.get("http://localhost:8080/products/all");
+    
+      setotelp(res.data.data);
+    } catch(error) {
+      console.log("Error fetching products",error);
     }
   };
 
+   //get totel orders 
   const getorders = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/users");
-      const users = res.data;
+      const res = await axios.get("http://localhost:8080/admin/overview/totelorders");
+ 
+   setTotalOrders(res.data.totelOrders)
+   console.log(totalOrders)
+   
+  
 
-      //get totel orders 
-      const ordersCount = users.reduce((total, user) => total + user.orderdetails.length, 0);
-      setTotalOrders(ordersCount);
-
-    } catch {
-      console.log("Error fetching orders");
+    } catch(error) {
+      console.log("Error fetching orders",error);
     }
   };
+
+const gettotelrevenue=async()=>{
+try{
+  const res=await axios.get("http://localhost:8080/admin/totelrevenue")
+  setrevenue(res.data.totelrevenue)
+}
+catch(error){
+  console.log(error)
+}
+}
+
+
+  
 
   useEffect(() => {
     getusers();
     getproducts();
     getorders();
+    gettotelrevenue()
   }, []);
 
   return (
@@ -89,6 +106,12 @@ src='https://media.istockphoto.com/id/539953664/photo/business-success-with-grow
             <h3 className="text-lg font-semibold">Total Users</h3>
             <p className="text-2xl font-bold mt-2">{totelu.length}</p>
           </div>
+
+           {/* Total Revenue */}
+        <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white p-6 rounded shadow text-center">
+          <h3 className="text-lg font-semibold">Total Revenue</h3>
+          <p className="text-2xl font-bold mt-2">${totalRevenue}</p>
+        </div>
         </div>
       </main>
     </div>

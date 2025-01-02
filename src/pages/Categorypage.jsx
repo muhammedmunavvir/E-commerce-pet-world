@@ -4,9 +4,7 @@ import axios from "axios";
 
 const Categorypage = () => {
   const { category } = useParams();
-  console.log("use params", useParams);
-  console.log("catrgooooory", category);
-  const [state, setstate] = useState([]);
+  const [product, setproduct] = useState([]);
 
   useEffect(() => {
     const getdogproduct = async () => {
@@ -14,9 +12,7 @@ const Categorypage = () => {
         const res = await axios.get(
           `http://localhost:8080/products/category?category=${category}`
         );
-        console.log("res", res);
-        setstate(res.data.data);
-        console.log("state................", state);
+        setproduct(res.data.data);
       } catch (error) {
         console.log("dog page", error);
       }
@@ -28,14 +24,13 @@ const Categorypage = () => {
   function fordetails(id) {
     nav(`/productdetails/${id}`);
   }
-
   return (
     <div className="flex flex-wrap justify-center p-4">
-      {state.map((obj) => (
+      {product.map((obj) => (  
         <div
-          key={obj.id}
+          key={obj._id}
           className="m-2 max-w-xs bg-white rounded-lg shadow-lg overflow-hidden"
-          onClick={() => fordetails(obj.id)}
+          onClick={() => fordetails(obj._id)}
         >
           <img
             className="w-full h-48 object-cover"

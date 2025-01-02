@@ -11,8 +11,9 @@ export const UserList = () => {
   useEffect(()=>{
     const getuser =async()=>{
       try{
-     const res =await axios.get("http://localhost:5000/users")
-       setusers(res.data)
+     const res =await axios.get("http://localhost:8080/admin/allusers")
+     console.log(res)
+       setusers(res.data.users)
       }
       catch{
         console.log("Error");
@@ -23,11 +24,11 @@ export const UserList = () => {
     getuser()
   },[])
 
-  const fuser = users.filter((user) => user.id === user.id && !user.admin);
+ 
 
 const nav =useNavigate()
-  const  viewuser=(id)=>{
-       nav(`/admin/userdetails/${id}`)
+  const  viewuser=(_id)=>{
+       nav(`/admin/userdetails/${_id}`)
        
    }
 
@@ -88,7 +89,7 @@ const unblockhandle=async(id)=>{
               </tr>
             </thead>
             <tbody>
-              {fuser.map((user) => (
+              {users.map((user) => (
                 <tr key={user.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-b">
                     {user.userName}
@@ -101,7 +102,7 @@ const unblockhandle=async(id)=>{
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium border-b">
                     <button className="bg-blue-500 text-white px-4 py-2 rounded "
-                    onClick={()=>viewuser(user.id)} key={user.id}>
+                    onClick={()=>viewuser(user._id)} key={user._id}>
                  View
                     </button>
                {

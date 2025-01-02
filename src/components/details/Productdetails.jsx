@@ -1,8 +1,8 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { carthandle } from '../foraddcart/Addcart';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { carthandle } from "../foraddcart/Addcart";
+import { toast } from "react-toastify";
 
 const Productdetails = () => {
   const { id } = useParams();
@@ -14,20 +14,20 @@ const Productdetails = () => {
       try {
         const res = await axios.get(`http://localhost:8080/products/${id}`);
         setProducts(res.data.data);
-    console.log(product)
       } catch (error) {
         console.log("Error fetching product:", error);
       }
     };
     fetchProducts();
-  }, [id]); 
- 
+  }, [id]);
 
   const tocart = async (product) => {
-    const userLoggedIn = localStorage.getItem('Uid') && localStorage.getItem('name');
+    const userLoggedIn =
+      localStorage.getItem("userId") && localStorage.getItem("username");
     if (userLoggedIn) {
+   
       await carthandle(product);
-    } else {
+    } else { 
       toast.warning("Please log in to add a product");
       navigate("/login");
     }
@@ -38,8 +38,8 @@ const Productdetails = () => {
   };
 
   return (
-    <div style={{ padding: '40px 20px', fontFamily: 'Arial, sans-serif' }}>
-      {Object.keys(product).length > 0 ? (
+    <div style={{ padding: "40px 20px", fontFamily: "Arial, sans-serif" }}>
+      {product ? (
         <div className="flex gap-8 items-start mb-8">
           {/* Back Button */}
           <button
@@ -71,9 +71,14 @@ const Productdetails = () => {
           />
 
           {/* Product Details */}
-          <div style={{ maxWidth: '600px' }}>
-            <h1 className="text-2xl font-bold text-gray-800 mb-4">{product.heading}</h1>
-            <p className="text-gray-600 text-base mb-5" style={{ lineHeight: '1.6' }}>
+          <div style={{ maxWidth: "600px" }}>
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">
+              {product.heading}
+            </h1>
+            <p
+              className="text-gray-600 text-base mb-5"
+              style={{ lineHeight: "1.6" }}
+            >
               {product.discription}
             </p>
             <p className="text-lg font-bold mb-2 text-gray-800">

@@ -37,7 +37,7 @@ const forhide=location.pathname.startsWith("/admin")
 
 <Routes>
  <Route path="/" element={<HomePage/>} />
- <Route path="/login" element={<Login/>} />
+ <Route path="/auth/login" element={<Login/>} />
  <Route path="/registerpage" element={<Register/>}/>
  <Route path="/Allproducts" element={<Allproducts/>}/>
  <Route path="/products/:category" element={<Categorypage/>}/>

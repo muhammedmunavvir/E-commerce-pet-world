@@ -1,93 +1,91 @@
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const Cartpage = () => {
+  const [cart, setCart] = useState([]);
+  const user = localStorage.getItem("userId");
 
 
-  import axios from 'axios';
-  import React, { useEffect, useState } from 'react';
-  import { useNavigate } from 'react-router-dom';
-  import { toast } from 'react-toastify';
 
-  const Cartpage = () => {
-    const [cart, setCart] = useState([]);
-    const user = localStorage.getItem("Uid");
+  const cartDisplay = async (user) => {
+    try {
+      const res = await axios.get(`http://localhost:8080/cart/view/${user}`);
+     
+      setCart(res.data.data);
+    } catch(error) {
+      console.log(error)
+    }
+  };
 
-   
-
-    const cartDisplay = async () => {
-      try {
-        const res = await axios.get(`http://localhost:5000/users/${user}`);
-        setCart(res.data.cart);
-        
-      } catch  {
-        console.log("Error");
-      } 
-    };
-
-    useEffect(() => {
-      cartDisplay();
-    }, []);
+  useEffect(() => {
+    cartDisplay();
+  }, []);
 
   //...................................
 
   const removeitem = async (product) => {
+       console.log("product.....",product)
     try {
-      
-      const updatedCart = cart.filter(item => item.id !== product.id);
-      await axios.patch(`http://localhost:5000/users/${user}`,{cart:updatedCart}) // Update cart in  backend
-     
-      setCart(updatedCart); // Update state only after backend update 
+      const productId=product._id
+      // const updatedCart = cart.filter((item) => item.id !== product.id);
+      await axios.delete(`http://localhost:8080/cart/remove/${productId}`, {
+        // cart: updatedCart,
+      }); // Update cart in  backend
+
+      // setCart(updatedCart); // Update state only after backend update
       cartDisplay();
       // the product id check to item id . and exclude matching product .  and return new arrAY TO updatecart.
       // it only remove from display
-      toast.warning("Item removed from your cart")
+      toast.warning("Item removed from your cart");
       cartDisplay();
       // setCart(updatedCart); // Update cart in state
-      
-    
-   
     } catch (error) {
       console.log("Error removing item", error);
-    } 
+    }
   };
 
- 
-  
   //.......................................................
-  
 
-
-
-  const nav =useNavigate()
-  const paymenthandle=()=>{
-    nav("/payment")
-  }
-
+  const nav = useNavigate();
+  const paymenthandle = () => {
+    nav("/payment");
+  };
 
   // incr qty
-
-  const inc=async(id)=>{
-    await axios.patch(`http://localhost:5000/users/${user}` ,{
-      cart:cart.map((item)=>item.id===id? {...item,qty:item.qty+1}:item)
+  
+  
+  const inc = async (id) => {
+    await axios.patch(`http://localhost:8080/updatecart/update/${id}`, {
+      cart: cart.map((item) =>
+        item.id === id ? { ...item, qty: item.qty + 1 } : item
+      ),
     });
 
-    cartDisplay()
-  }
+    cartDisplay();
+  };
 
   //dec qty
-   const dec=async(id)=>{
-    await axios.patch(`http://localhost:5000/users/${user}`,{
-      cart:cart.map((item)=>item.id===id ?{...item,qty:item.qty-1}:item)
-    })
-    cartDisplay()
-   }
+  const dec = async (id) => {
+    await axios.patch(`http://localhost:5000/users/${user}`, {
+      cart: cart.map((item) =>
+        item.id === id ? { ...item, qty: item.qty - 1 } : item
+      ),
+    });
+    cartDisplay();
+  };
 
-
-   return (
+  return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Your Cart</h1>
+      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+        Your Cart
+      </h1>
       {cart.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {cart.map((product) => (
             <div
-              key={product.id}
+              key={product._id}
               className="border rounded-lg shadow-lg p-6 flex flex-col items-center bg-white hover:shadow-xl transition-shadow duration-300"
             >
               <img
@@ -95,23 +93,29 @@
                 alt={product.name}
                 className="w-36 h-36 object-cover mb-4 rounded-lg shadow-md"
               />
-              <h2 className="text-xl font-semibold text-gray-800">{product.name}</h2>
-              <p className="text-gray-600 text-sm mt-2">Price: ${product.price * product.qty}</p>
+              <h2 className="text-xl font-semibold text-gray-800">
+                {product.name}
+              </h2>
+              <p className="text-gray-600 text-sm mt-2">
+                Price: ${product.price * product.qty}
+              </p>
               <div className="flex items-center space-x-4 mt-4">
-  <button
-    onClick={() => inc(product.id)}
-    className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200"
-  >
-    +
-  </button>
-  <h3 className="text-xl font-semibold text-gray-800">{product.qty}</h3>
-  <button
-    onClick={() => dec(product.id)}
-    className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200"
-  >
-    -
-  </button>
-</div>
+                <button
+                  onClick={() => inc(product._id)}
+                  className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200"
+                >
+                  +
+                </button>
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {product.qty}
+                </h3>
+                <button
+                  onClick={() => dec(product.id)}
+                  className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200"
+                >
+                  -
+                </button>
+              </div>
 
               <button
                 className="mt-4 w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-300"
@@ -131,11 +135,12 @@
           </div>
         </div>
       ) : (
-        <p className="text-lg text-center text-gray-600">No items in the cart.</p>
+        <p className="text-lg text-center text-gray-600">
+          No items in the cart.
+        </p>
       )}
     </div>
   );
-  
 };
 
 export default Cartpage;

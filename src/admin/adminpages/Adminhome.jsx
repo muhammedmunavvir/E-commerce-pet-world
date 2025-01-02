@@ -4,47 +4,47 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 export const Adminhome = () => {
 
-  //function for accessing admin to admin page
+//   //function for accessing admin to admin page
 
-  const [user,setusers]=useState(false)
-const id=localStorage.getItem("Uid")
+//   const [user,setusers]=useState(false)
+// const id=localStorage.getItem("Uid")
 
-const nav=useNavigate()
-   const getuser=async()=>{
-      try{
-       const res=await axios.get(`http://localhost:5000/users/${id}`)
-       if(res.data.admin) {
-        setusers(true)
-       }else{
-        setusers(false)
-       }
+// const nav=useNavigate()
+//    const getuser=async()=>{
+//       try{
+//        const res=await axios.get(`http://localhost:5000/users/${id}`)
+//        if(res.data.admin) {
+//         setusers(true)
+//        }else{
+//         setusers(false)
+//        }
   
        
-      }
-      catch{ 
-        console.log("Error");
+//       }
+//       catch{ 
+//         console.log("Error");
         
-      }
-   }    
-useEffect(()=>{
-  getuser()
-},[])
+//       }
+//    }    
+// useEffect(()=>{
+//   getuser()
+// },[])
    
 
-if(!user){
-   return(<div><h1>Not accessible</h1></div>)
+// if(!user){
+//    return(<div><h1>Not accessible</h1></div>)
     
    
-}
+// }
 
 
 
 const logout=()=>{
-    localStorage.removeItem("Uid")
-    localStorage.removeItem("name")
-    localStorage.removeItem("userEmail")
-    localStorage.removeItem("admin")
-nav("/")
+//     localStorage.removeItem("Uid")
+//     localStorage.removeItem("name")
+//     localStorage.removeItem("userEmail")
+//     localStorage.removeItem("admin")
+// nav("/")
 
 }
 
