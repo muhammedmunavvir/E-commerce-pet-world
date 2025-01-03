@@ -1,7 +1,7 @@
 // import "./App.css";
 
 import HomePage from "./pages/Home";
-import {Route,Routes,useLocation} from 'react-router-dom'
+import { Route, Routes, useLocation } from "react-router-dom";
 import Login from "./Login/Login";
 import Register from "./Login/Registerpage";
 import { Allproducts } from "./pages/Allproducts";
@@ -12,61 +12,57 @@ import Cartpage from "./pages/Cartpage";
 import Paymentsection from "./pages/Paymentsection";
 import Summarypage from "./pages/Summarypage";
 
-
- 
 import { Adminhome } from "./admin/adminpages/Adminhome";
 import { Dashboard } from "./admin/adminpages/Dashboard";
 import { UserList } from "./admin/adminpages/UserList";
 import { Category } from "./admin/adminpages/Category";
-import { Addcat } from "./admin/Cat.Dog/Addcat";
-import { Adddog } from "./admin/Cat.Dog/Adddog";
+import { Addcat } from "./admin/Cat.Dog/cat";
+import { Adddog } from "./admin/Cat.Dog/dog";
 import { Editing } from "./admin/adminpages/Editing";
 import { Addnewproduct } from "./admin/adminpages/Addnewproduct";
 import { Userdetails } from "./admin/adminpages/Userdetails";
 import Categorypage from "./pages/Categorypage";
 
-
 //adimin section
 
 function App() {
- const location=useLocation()
-const forhide=location.pathname.startsWith("/admin")
-  return <div>
-    {!forhide&&<Navbar/>}
+  const location = useLocation();
+  const forhide = location.pathname.startsWith("/admin");
+  return (
+    <div>
+      {!forhide && <Navbar />}
 
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/registerpage" element={<Register />} />
+        <Route path="/Allproducts" element={<Allproducts />} />
+        <Route path="/products/:category" element={<Categorypage />} />
+        <Route path="/productdetails/:id" element={<Productdetails />} />
+        <Route path="/cartpage" element={<Cartpage />} />
+        <Route path="/payment" element={<Paymentsection />} />
+        <Route path="/ordersum" element={<Summarypage />} />
 
-<Routes>
- <Route path="/" element={<HomePage/>} />
- <Route path="/auth/login" element={<Login/>} />
- <Route path="/registerpage" element={<Register/>}/>
- <Route path="/Allproducts" element={<Allproducts/>}/>
- <Route path="/products/:category" element={<Categorypage/>}/>
- <Route path="/productdetails/:id" element={<Productdetails/>}/>
- <Route path="/cartpage" element={<Cartpage/>}/> 
- <Route path="/payment" element={<Paymentsection/>}/>
- <Route path="/ordersum" element={<Summarypage/>}/>
+        {/* //admib */}
+
+       <Route path="/admin" element={<Adminhome />}>
+        <Route index element={<Dashboard />} />
+          <Route path="userlist" element={<UserList />} />
+          <Route path="allproducts" element={<Category />} />
+            {/* <Route path="cat" element={<Addcat />} />
+            <Route path="dog" element={<Adddog />} />{" "} */}
  
 
-{/* //admib */}
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="editing/:pID" element={<Editing />} />
+          <Route path="addnewproduct" element={<Addnewproduct />} />
 
-<Route path="/admin" element={<Adminhome/>}>
-  <Route index element={<Dashboard/>}/>
-  <Route path="userlist" element={<UserList/>}/>
-  <Route path="category" element={<Category/>}> <Route index element={ <Addcat/>}/> <Route path="addcat" element={ <Addcat/>}/>   <Route path="adddog" element={<Adddog/>}/>  </Route>
- 
-  <Route path="dashboard" element={<Dashboard/>}/>
-  <Route path="editing/:pID" element={<Editing/>}/>
-  <Route path="addnewproduct"element={<Addnewproduct/>}/>
-
-  <Route path="userdetails/:id" element={<Userdetails/>}/>
-
-</Route>
- 
-</Routes>
-{!forhide&&<Footer/>}
- 
-
-  </div>;
+         <Route path="userdetails/:id" element={<Userdetails />} />
+        </Route>
+      </Routes>
+      {!forhide && <Footer />}
+    </div>
+  );
 }
 
 export default App;

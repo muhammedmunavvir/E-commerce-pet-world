@@ -130,6 +130,7 @@ export const Navbar = () => {
 
           {/* Cart Button with Badge */}
           <div className="hidden md:flex relative">
+            { uName?( 
             <NavLink
               to="/cartpage"
               className="flex items-center justify-center border-2 border-teal-500 text-teal-500 bg-white rounded-full p-2 hover:bg-teal-500 hover:text-white transition duration-300"
@@ -157,6 +158,7 @@ export const Navbar = () => {
                 </span>
               ) : null}
             </NavLink>
+            ):null}
           </div>
 
           <div className="relative ml-4">

@@ -26,10 +26,10 @@ const Productdetails = () => {
       localStorage.getItem("userId") && localStorage.getItem("username");
     if (userLoggedIn) {
    
-      await carthandle(product);
+      await carthandle(product); 
     } else { 
       toast.warning("Please log in to add a product");
-      navigate("/login");
+      navigate("/auth/login");
     }
   };
 
