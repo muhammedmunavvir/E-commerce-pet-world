@@ -29,25 +29,21 @@ const Login = () => {
         values,
         { withCredentials: true }
       );
-      console.log("user from backend", response);
-      const _id = response.data.user._id;
-      const user=response.data.user
-      console.log("user role",user)
-      
-      const username = response.data.user.username;
+
+      const user = response.data.data;
+      console.log("user role", user);
+
       if (response.data.status === "success") {
-        localStorage.setItem("userId", _id);
-        localStorage.setItem("username", username);
-    
+        localStorage.setItem("username", user.username);
+        localStorage.setItem("role", user.role);
+        localStorage.setItem("userId",user._id)
 
         toast.success("Login Successfully");
-       
-      
 
-        if(user.role==="admin"){
-          navigate("/admin")
-        }else{
-          navigate("/")
+        if (user.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
         }
       }
     } catch (error) {

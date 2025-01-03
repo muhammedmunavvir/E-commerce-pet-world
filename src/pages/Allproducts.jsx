@@ -1,3 +1,5 @@
+
+import API_BASE_URL from "../config/apiconfig";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +10,7 @@ export const Allproducts = () => {
   useEffect(() => {
     const getproduct = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/products/all");
+        const res = await axios.get(`${API_BASE_URL}/products/all`);
    
         allproducts(res.data.data);
       } catch {

@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const UserList = () => {
   const [users, setusers] = useState([]);
-  // const [action,setaction]=useState()
+
   const getuser = async () => {
     try {
       const res = await axios.get("http://localhost:8080/admin/allusers");

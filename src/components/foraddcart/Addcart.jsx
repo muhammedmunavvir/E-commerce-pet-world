@@ -16,7 +16,7 @@ export const carthandle = async (product) => {
 
     } catch (error) {
      
-      // console.log(error);
+      console.log(error);
 
       if (error.response && error.response.data.message === "This item is already in your cart") {
         toast.info("Item is already in your cart!");

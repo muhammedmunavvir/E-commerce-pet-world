@@ -16,8 +16,6 @@ import { Adminhome } from "./admin/adminpages/Adminhome";
 import { Dashboard } from "./admin/adminpages/Dashboard";
 import { UserList } from "./admin/adminpages/UserList";
 import { Category } from "./admin/adminpages/Category";
-import { Addcat } from "./admin/Cat.Dog/cat";
-import { Adddog } from "./admin/Cat.Dog/dog";
 import { Editing } from "./admin/adminpages/Editing";
 import { Addnewproduct } from "./admin/adminpages/Addnewproduct";
 import { Userdetails } from "./admin/adminpages/Userdetails";

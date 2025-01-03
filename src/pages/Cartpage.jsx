@@ -7,15 +7,13 @@ const Cartpage = () => {
   const [cart, setCart] = useState([]);
   const user = localStorage.getItem("userId");
 
-
-
   const cartDisplay = async (user) => {
     try {
       const res = await axios.get(`http://localhost:8080/cart/view/${user}`);
-     
+
       setCart(res.data.data);
-    } catch(error) {
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -26,9 +24,9 @@ const Cartpage = () => {
   //...................................
 
   const removeitem = async (product) => {
-       console.log("product.....",product)
+   
     try {
-      const productId=product._id
+      const productId = product._id;
       // const updatedCart = cart.filter((item) => item.id !== product.id);
       await axios.delete(`http://localhost:8080/cart/remove/${productId}`, {
         // cart: updatedCart,
@@ -54,30 +52,41 @@ const Cartpage = () => {
   };
 
   // incr qty
-  
-  
+
+  const incrmentbody = {
+    action: "increment",
+  };
   const inc = async (id) => {
-    await axios.patch(`http://localhost:8080/updatecart/update/${id}`, {
-      cart: cart.map((item) =>
-        item.id === id ? { ...item, qty: item.qty + 1 } : item
-      ),
-    });
+    await axios.post(
+      `http://localhost:8080/updatecart/update/${id}`,
+      incrmentbody
+    );
 
     cartDisplay();
   };
 
+  const decrement = {
+    action: "decrement",
+  };
   //dec qty
+
+  
   const dec = async (id) => {
-    await axios.patch(`http://localhost:5000/users/${user}`, {
-      cart: cart.map((item) =>
-        item.id === id ? { ...item, qty: item.qty - 1 } : item
-      ),
-    });
+  
+    const product=cart.find(item => item._id === id);
+    if(product.qty > 1){ 
+    await axios.post(
+      `http://localhost:8080/updatecart/update/${id}`,
+      decrement
+    );
+  }else{
+    // toast.error("Quantity cannot be less than 1 ")
+    // null
+  }
     cartDisplay();
   };
 
   return (
-  
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
         Your Cart
@@ -111,7 +120,7 @@ const Cartpage = () => {
                   {product.qty}
                 </h3>
                 <button
-                  onClick={() => dec(product.id)}
+                  onClick={() => dec(product._id)}
                   className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200"
                 >
                   -
@@ -131,7 +140,7 @@ const Cartpage = () => {
               className="w-full max-w-lg px-6 py-3 bg-green-600 text-white text-lg font-semibold rounded-lg hover:bg-green-700 transition duration-300"
               onClick={paymenthandle}
             >
-              Proceed to Payment
+              Place order
             </button>
           </div>
         </div>

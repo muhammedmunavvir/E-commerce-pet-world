@@ -65,9 +65,10 @@ export const Navbar = () => {
   }, []);
 
   function logout() {
-    localStorage.removeItem("userId");
-    getcart();
-    localStorage.removeItem("username");
+    // localStorage.removeItem("userId");
+    // getcart();
+    // localStorage.removeItem("username");
+    localStorage.clear()
 
     toast.info("You have been logged out.");
     nav("/");

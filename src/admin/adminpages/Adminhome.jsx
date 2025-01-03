@@ -3,43 +3,29 @@ import React, { useEffect, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 export const Adminhome = () => {
-    //function for accessing admin to admin page
+  const nav = useNavigate();
+  const role = localStorage.getItem("role");
+  useEffect(() => {
+    if (role !== "admin") {
+      nav("/");
+    }
+    
+  }, [role, nav])
 
-    const [user,setusers]=useState(false)
-  const id=localStorage.getItem("Uid")
+  // if (role === "admin") {
+  //   nav("/admin");
+  // } else {
+  //   return (
+  //     <div>
+  //       <h1>Not accessible</h1>
+  //     </div>
+  //   );
+  // }
 
-  const nav=useNavigate()
-     const getuser=async()=>{
-        try{
-         const res=await axios.get(`http://localhost:8080/admin/allusers/${id}`)
-         console.log(res)
-         if(res.data==="admin") {
-          setusers(true)
-         }else{
-          setusers(false)
-         }
-
-        }
-        catch{
-          console.log("Error");
-
-        }
-     }
-  useEffect(()=>{
-    getuser()
-  },[])
-
-  if(!user){
-     return(<div><h1>Not accessible</h1></div>)
-
-  }
-
+ 
   const logout = () => {
-        localStorage.removeItem("Uid")
-        localStorage.removeItem("name")
-        localStorage.removeItem("userEmail")
-        localStorage.removeItem("admin")
-    nav("/")
+    localStorage.clear();
+    nav("/");
   };
 
   return (
