@@ -20,6 +20,7 @@ import { Editing } from "./admin/adminpages/Editing";
 import { Addnewproduct } from "./admin/adminpages/Addnewproduct";
 import { Userdetails } from "./admin/adminpages/Userdetails";
 import Categorypage from "./pages/Categorypage";
+import { Razorpaycheckoutpage } from "./pages/Razorpaycheckflow";
 
 //adimin section
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="/cartpage" element={<Cartpage />} />
         <Route path="/payment" element={<Paymentsection />} />
         <Route path="/ordersum" element={<Summarypage />} />
+        <Route path="/razorpaycheckflow"element={ <Razorpaycheckoutpage/>}  />
 
         {/* //admib */}
 

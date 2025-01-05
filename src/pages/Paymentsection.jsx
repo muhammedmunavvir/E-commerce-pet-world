@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import API_BASE_URL from "../config/apiconfig"; // Ensure this is correctly configured
+import API_BASE_URL from "../config/apiconfig"; 
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 const PaymentSection = () => {
@@ -27,35 +27,36 @@ const PaymentSection = () => {
   // Submit Payment Handler
   const submitHandle = async (e) => {
     e.preventDefault();
-
     setLoading(true);
-
+  
     try {
-      const { address, city, state, zipCode } = details;
-
-      // Call the API to create an order or process payment
+      const { address, city, state, zipCode, paymentmethod } = details;
+     console.log("payment method",paymentmethod)
+      // Create the order
       const response = await axios.post(`${API_BASE_URL}/api/payment`, {
         shippingAddress: { address, city, state, zipCode },
-        paymentmethod: details.paymentmethod,
+        paymentmethod,
       });
+   
 
-      toast.success("Payment successful! Your order has been placed.");
-      console.log("Payment Response:", response.data);
- 
-// if(response.data.order.paymentmethod==="UPI"){
-
-//   navigate("/razorpaycheckout")
-// }   
-
-      // Redirect to order summary or confirmation page
-      navigate("/order-confirmation");
+      if (paymentmethod === "UPI") {
+        navigate("/razorpaycheckflow", { state: { totalAmount: response.data.totalAmount } });
+      } else {
+        navigate("/ordersum");
+        toast.success("Payment successfull ");
+      }
+      
+  
+      // Redirect based on payment method
+      
     } catch (error) {
       console.error("Payment Error:", error);
-      toast.error("An error occurred while processing the payment.");
+      toast.error("Error processing payment.");
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
@@ -180,3 +181,4 @@ const PaymentSection = () => {
 };
 
 export default PaymentSection;
+
