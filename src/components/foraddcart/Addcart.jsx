@@ -14,18 +14,19 @@ export const carthandle = async (product) => {
       console.log(res);
       toast.success("Item successfully added to the cart!");
 
+      window.location.reload();
     } catch (error) {
-     
       console.log(error);
 
-      if (error.response && error.response.data.message === "This item is already in your cart") {
+      if (
+        error.response &&
+        error.response.data.message === "This item is already in your cart"
+      ) {
         toast.info("Item is already in your cart!");
       } else {
         toast.error("Something went wrong while adding the item to the cart.");
       }
     }
-
-
   } else {
     toast.error("User not logged in.");
   }

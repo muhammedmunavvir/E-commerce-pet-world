@@ -1,71 +1,60 @@
-import React, { useState, useEffect } from "react";
-// import Cartpage from './Cartpage';  // Import the Cartpage component
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "axios";
-
-const Paymentsection = () => {
-  const nav = useNavigate();
-
-  const [cart, setCart] = useState([]);
-  const [order, setOrder] = useState([]);
-  const user = localStorage.getItem("Uid");
-
-  useEffect(() => {
-    cartDisplay();
-  }, [cart]);
-
-  const cartDisplay = async () => {
-    try {
-      const res = await axios.get(`http://localhost:5000/users/${user}`);
-      setCart(res.data.cart);
-      setOrder(res.data.orderdetails);
-    } catch {
-      console.log("Error");
-    }
-  };
-
-  // total amount
-
-  const a = cart.map((item) => item.price * item.qty);
-  let totalA = a.reduce((acc, cur) => (acc += cur), 0);
-
-  // adrres
-
-  const [address, setAddress] = useState({
+import API_BASE_URL from "../config/apiconfig"; // Ensure this is correctly configured
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+const PaymentSection = () => {
+  const [details, setDetails] = useState({
     address: "",
     city: "",
     state: "",
-    zipcode: "",
-    paymentMethode: "",
+    zipCode: "",
+    paymentmethod: "",
   });
 
+  const [loading, setLoading] = useState(false); // For handling loading state
+  const navigate = useNavigate();
+
+  // Handle input changes
   const handleChange = (e) => {
-    const { value, name } = e.target;
-
-    setAddress({ ...address, [name]: value });
+    const { name, value } = e.target;
+    setDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
   };
 
-  // clear cart , order deatails
-  const clearcart = async () => {
-    try {
-      await axios.patch(`http://localhost:5000/users/${user}`, {
-        orderdetails: [
-          ...order,
-          { products: cart, address: address, id: Date.now(), amount: totalA },
-        ],
-      });
-      await axios.patch(`http://localhost:5000/users/${user}`, { cart: [] }); //it for clear the cart
-    } catch {
-      console.log("Error");
-    }
-  };
-
-  const submithandle = (e) => {
+  // Submit Payment Handler
+  const submitHandle = async (e) => {
     e.preventDefault();
-    clearcart();
-    cartDisplay();
 
-    nav("/ordersum");
+    setLoading(true);
+
+    try {
+      const { address, city, state, zipCode } = details;
+
+      // Call the API to create an order or process payment
+      const response = await axios.post(`${API_BASE_URL}/api/payment`, {
+        shippingAddress: { address, city, state, zipCode },
+        paymentmethod: details.paymentmethod,
+      });
+
+      toast.success("Payment successful! Your order has been placed.");
+      console.log("Payment Response:", response.data);
+ 
+// if(response.data.order.paymentmethod==="UPI"){
+
+//   navigate("/razorpaycheckout")
+// }   
+
+      // Redirect to order summary or confirmation page
+      navigate("/order-confirmation");
+    } catch (error) {
+      console.error("Payment Error:", error);
+      toast.error("An error occurred while processing the payment.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -75,18 +64,12 @@ const Paymentsection = () => {
         Payment Section
       </h2>
 
-      {/* Cart Page */}
-      {/* <div className="mb-8">
-        <h3 className="text-2xl font-semibold text-gray-800 mb-4">Your Cart</h3>
-        <Cartpage />
-      </div> */}
-
       {/* Payment Form */}
       <div className="bg-gray-100 p-6 rounded-lg shadow-md">
         <h3 className="text-2xl font-bold mb-6 text-gray-700">
           Payment Details
         </h3>
-        <form className="space-y-6" onSubmit={submithandle}>
+        <form className="space-y-6" onSubmit={submitHandle}>
           {/* Address Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -128,7 +111,7 @@ const Paymentsection = () => {
             <div>
               <label className="block text-gray-600 mb-2">Zip Code</label>
               <input
-                name="zipcode"
+                name="zipCode"
                 onChange={handleChange}
                 type="text"
                 placeholder="Enter your zip code"
@@ -148,7 +131,7 @@ const Paymentsection = () => {
                 <input
                   type="radio"
                   onChange={handleChange}
-                  name="paymentMethod"
+                  name="paymentmethod"
                   value="UPI"
                   className="form-radio text-blue-500"
                   required
@@ -159,7 +142,7 @@ const Paymentsection = () => {
                 <input
                   type="radio"
                   onChange={handleChange}
-                  name="paymentMethod"
+                  name="paymentmethod"
                   value="Card"
                   className="form-radio text-blue-500"
                   required
@@ -170,8 +153,8 @@ const Paymentsection = () => {
                 <input
                   type="radio"
                   onChange={handleChange}
-                  name="paymentMethod"
-                  value="Cash"
+                  name="paymentmethod"  
+                  value="cash"
                   className="form-radio text-blue-500"
                   required
                 />
@@ -184,9 +167,10 @@ const Paymentsection = () => {
           <div className="mt-6">
             <button
               type="submit"
+              disabled={loading}
               className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300"
             >
-              Submit Payment
+              {loading ? "Processing..." : "Submit Payment"}
             </button>
           </div>
         </form>
@@ -195,4 +179,4 @@ const Paymentsection = () => {
   );
 };
 
-export default Paymentsection;
+export default PaymentSection;
