@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../config/apiconfig';
 
 const Summarypage = () => {
   const navigate = useNavigate();
@@ -10,14 +11,17 @@ const Summarypage = () => {
   };
 
   const [Odetails, setOdetails] = useState([]);
-  const userId = localStorage.getItem("Uid");
+  const userId = localStorage.getItem("UserId");
 
   const gettotel = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/users/${userId}`);
-      setOdetails(res.data.orderdetails );
-    } catch {
-      console.log("Error");
+      const res = await axios.get(`${API_BASE_URL}/api/orderdeatils/${userId}`);
+      console.log(res)
+      setOdetails(res.data.data );
+
+      console.log("order details",Odetails)
+    } catch(error) {
+      console.log(error);
     }
   };
 
@@ -25,6 +29,9 @@ const Summarypage = () => {
     gettotel();
   }, []);
 
+  // const totelAMount=res.data.data.totalAmount
+
+// console.log("toooooootalamont",totalamount)
   // Ensure there are order details before accessing them
   const last = Odetails.length > 0 ? Odetails[Odetails.length - 1] : null;
   const pro = last ? last.products : [];

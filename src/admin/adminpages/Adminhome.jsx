@@ -8,19 +8,16 @@ export const Adminhome = () => {
   useEffect(() => {
     if (role !== "admin") {
       nav("/");
+      <div>
+      <h1>Not accessible</h1>
+    </div>
+    }
+    else{
+      nav("/admin");
     }
     
   }, [role, nav])
 
-  // if (role === "admin") {
-  //   nav("/admin");
-  // } else {
-  //   return (
-  //     <div>
-  //       <h1>Not accessible</h1>
-  //     </div>
-  //   );
-  // }
 
  
   const logout = () => {
@@ -98,3 +95,5 @@ export const Adminhome = () => {
     </div>
   );
 };
+
+

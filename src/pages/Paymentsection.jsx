@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import API_BASE_URL from "../config/apiconfig"; 
+import API_BASE_URL from "../config/apiconfig";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 const PaymentSection = () => {
@@ -28,27 +28,28 @@ const PaymentSection = () => {
   const submitHandle = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
     try {
       const { address, city, state, zipCode, paymentmethod } = details;
-     console.log("payment method",paymentmethod)
+      console.log("payment method", paymentmethod);
       // Create the order
       const response = await axios.post(`${API_BASE_URL}/api/payment`, {
         shippingAddress: { address, city, state, zipCode },
         paymentmethod,
       });
-   
+      console.log("asdfghjk", response);
+      const orderID = response.data.razorpay_order_id;
 
       if (paymentmethod === "UPI") {
-        navigate("/razorpaycheckflow", { state: { totalAmount: response.data.totalAmount } });
+        navigate("/razorpaycheckflow", {
+          state: { totalAmount: response.data.totalAmount, orderID: orderID },
+        });
       } else {
         navigate("/ordersum");
         toast.success("Payment successfull ");
       }
-      
-  
+
       // Redirect based on payment method
-      
     } catch (error) {
       console.error("Payment Error:", error);
       toast.error("Error processing payment.");
@@ -56,7 +57,6 @@ const PaymentSection = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
@@ -154,7 +154,7 @@ const PaymentSection = () => {
                 <input
                   type="radio"
                   onChange={handleChange}
-                  name="paymentmethod"  
+                  name="paymentmethod"
                   value="cash"
                   className="form-radio text-blue-500"
                   required
@@ -181,4 +181,3 @@ const PaymentSection = () => {
 };
 
 export default PaymentSection;
-
