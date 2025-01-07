@@ -21,6 +21,10 @@ import { Addnewproduct } from "./admin/adminpages/Addnewproduct";
 import { Userdetails } from "./admin/adminpages/Userdetails";
 import Categorypage from "./pages/Categorypage";
 import { Razorpaycheckoutpage } from "./pages/Razorpaycheckflow";
+import { NOtefound } from "./pages/NOtefound";
+import { Suspense } from "react";
+import { Loading } from "./pages/Loading";
+
 
 //adimin section
 
@@ -35,7 +39,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/registerpage" element={<Register />} />
-        <Route path="/Allproducts" element={<Allproducts />} />
+        <Route path="/Allproducts" element={ <Suspense fallback={<Loading/>}> <Allproducts /></Suspense>  } />
         <Route path="/products/:category" element={<Categorypage />} />
         <Route path="/productdetails/:id" element={<Productdetails />} />
         <Route path="/cartpage" element={<Cartpage />} />
@@ -49,16 +53,15 @@ function App() {
         <Route index element={<Dashboard />} />
           <Route path="userlist" element={<UserList />} />
           <Route path="allproducts" element={<Category />} />
-            {/* <Route path="cat" element={<Addcat />} />
-            <Route path="dog" element={<Adddog />} />{" "} */}
- 
-
+       
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="editing/:pID" element={<Editing />} />
           <Route path="addnewproduct" element={<Addnewproduct />} />
 
          <Route path="userdetails/:id" element={<Userdetails />} />
+  
         </Route>
+        <Route path="/*" element={<NOtefound/>}/>
       </Routes>
       {!forhide && <Footer />}
     </div>

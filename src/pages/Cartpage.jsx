@@ -38,7 +38,7 @@ const Cartpage = () => {
       // it only remove from display
       toast.warning("Item removed from your cart");
       cartDisplay();
-      // window.location.reload();      // setCart(updatedCart); // Update cart in state
+      window.location.reload();      // setCart(updatedCart); // Update cart in state
     } catch (error) {
       console.log("Error removing item", error);
     }

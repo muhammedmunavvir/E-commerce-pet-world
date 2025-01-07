@@ -37,7 +37,7 @@ const PaymentSection = () => {
         shippingAddress: { address, city, state, zipCode },
         paymentmethod,
       });
-      console.log("asdfghjk", response);
+      console.log("response", response);
       const orderID = response.data.razorpay_order_id;
 
       if (paymentmethod === "UPI") {
@@ -47,6 +47,7 @@ const PaymentSection = () => {
       } else {
         navigate("/ordersum");
         toast.success("Payment successfull ");
+        window.location.reload();
       }
 
       // Redirect based on payment method

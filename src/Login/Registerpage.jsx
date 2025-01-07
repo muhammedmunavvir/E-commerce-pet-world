@@ -13,8 +13,8 @@ const Register = () => {
     cart: [],
     orderdetails: [],
   });
-  const {username,email,password,}=user
-  const filterdbody={username,email,password,}
+  const { username, email, password } = user;
+  const filterdbody = { username, email, password };
 
   const [error, seterror] = useState({});
   const nav = useNavigate();
@@ -80,14 +80,11 @@ const Register = () => {
         alert("email id already taken");
       } else {
         try {
-         console.log(user)
-           await axios.post(
-            "http://localhost:8080/auth/register",
-            filterdbody
-          );
+          console.log(user);
+          await axios.post("http://localhost:8080/auth/register", filterdbody);
           toast.success("Registration successful!");
 
-          nav("/login");
+          nav("/auth/login");
 
           setuser({
             fullname: "",
@@ -97,12 +94,12 @@ const Register = () => {
             password: "",
             conformpassword: "",
           });
-        } catch (error){
-          console.log("error during registration",error);
+        } catch (error) {
+          console.log("error during registration", error);
         }
       }
     }
-  };  
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-purple-500 to-blue-500">

@@ -13,7 +13,7 @@ export const Userdetails = () => {
         const res = await axios.get(
           `http://localhost:8080/admin/userDetails/${id}`
         );
-        console.log(res)
+        console.log(res);
         setdetails(res.data.data);
       } catch {
         console.log("Error");
@@ -37,7 +37,7 @@ export const Userdetails = () => {
                 className="w-28 h-28 rounded-full border-4 border-white shadow-lg"
                 src={
                   user.avatar ||
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6xc8NsbrCg4sIXjqVe54jrWElkiqswSPyX9M9KrAK3gZnDKs-Uc7CYxt427ekCOFenTw&usqp=CAU"
+                  "https://imgs.search.brave.com/-uuax0nt6jpQ2DOSjBn57yaryr66_jGy6mlsojDyXWs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi91c2Vy/LXNpZ24taWNvbi1w/ZXJzb24tc3ltYm9s/LWh1bWFuLWF2YXRh/ci1yaWNoLW1hbi04/NDUxOTA4My5qcGc"
                 }
                 alt="User avatar"
               />
@@ -46,18 +46,37 @@ export const Userdetails = () => {
               <h1 className="text-2xl font-semibold text-gray-800">
                 {user.username}
               </h1>
-              <p className="text-gray-600 text-sm mt-1"><strong>Email:</strong> {user.email}</p>
-              <p className="text-gray-600 text-sm mt-1"><strong>Age:</strong> {user.age}</p>
-              <p className="text-gray-600 text-sm mt-1"><strong>Role:</strong> {user.role}</p>
-              <p className="text-gray-600 text-sm mt-1"><strong>Status:</strong> {user.status}</p>
               <p className="text-gray-600 text-sm mt-1">
-                <strong>Cart:</strong> {user.cart.length > 0 ? user.cart.join(", ") : "No items in cart"}
+                <strong>Email:</strong> {user.email}
               </p>
-              
+              <p className="text-gray-600 text-sm mt-1">
+                <strong>Age:</strong> {user.age}
+              </p>
+              <p className="text-gray-600 text-sm mt-1">
+                <strong>Role:</strong> {user.role}
+              </p>
+              <p className="text-gray-600 text-sm mt-1">
+  <strong>Status:</strong>{" "}
+  <span
+    className={`font-bold ${
+      user.status === "Active" ? "text-green-500" : "text-red-500"
+    } text-lg`}
+  >
+    {user.status}
+  </span>
+</p>
+
+
+              <p className="text-gray-600 text-sm mt-1">
+                <strong>Cart:</strong>{" "}
+                {user.cart.length > 0
+                  ? user.cart.join(", ")
+                  : "No items in cart"}
+              </p>
             </div>
           </div>
         ))}
       </div>
     </div>
   );
-}  
+};

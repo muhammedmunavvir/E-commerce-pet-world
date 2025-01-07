@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 import {  useLocation, useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios
-import API_BASE_URL from "../config/apiconfig"; // Replace with your API config file path
+import axios from "axios"; 
+import API_BASE_URL from "../config/apiconfig"; 
 
 export const Razorpaycheckoutpage = () => {
   const navigate=useNavigate()
   const location = useLocation();
-  const { totalAmount ,orderID} = location.state || {}; // Get the totalAmount from the state passed during navigation
+  const { totalAmount ,orderID} = location.state || {}; 
  
   console.log("from payment setion",orderID)
-  console.log("Total Amount:", totalAmount); // Check the totalAmount
+  console.log("Total Amount:", totalAmount);
 
   useEffect(() => {
     const initializeRazorpay = () => {
@@ -64,7 +64,9 @@ export const Razorpaycheckoutpage = () => {
             console.log("Payment Verification Response:", verifyResponse.data);
             if (verifyResponse.data.success) {
               toast.success("Payment verified successfully!");
-              navigate("/ordersum")  
+             
+              navigate("/ordersum") 
+              window.location.reload(); 
             } 
              
             else {
@@ -75,7 +77,7 @@ export const Razorpaycheckoutpage = () => {
             alert("Payment verification failed due to a server error.");
           }
          finally {
-          // Explicitly close the Razorpay modal
+          // close the Razorpay modal
           const razorpay = new window.Razorpay();
           razorpay.close();
         }

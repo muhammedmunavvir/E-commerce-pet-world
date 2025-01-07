@@ -5,26 +5,29 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 export const Adminhome = () => {
   const nav = useNavigate();
   const role = localStorage.getItem("role");
-  useEffect(() => {
+
+  
     if (role !== "admin") {
-      nav("/");
-      <div>
-      <h1>Not accessible</h1>
-    </div>
+      // nav("/");
+      return (
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+          <div className="text-center p-6 bg-white shadow-lg rounded-lg max-w-sm">
+            <h1 className="text-3xl font-semibold text-red-500">Not Accessible</h1>
+            <p className="text-lg text-gray-600 mt-4">Sorry, this page is not accessible at the moment.</p>
+          </div>
+        </div>
+      );
+      
     }
     else{
-      nav("/admin");
-    }
-    
-  }, [role, nav])
-
-
- 
+      // nav("/admin");
+  
   const logout = () => {
     localStorage.clear();
     nav("/");
   };
 
+ 
   return (
     <div className="min-h-screen flex " style={{ background: "#5d6e6e" }}>
       {/* Sidebar */}
@@ -96,4 +99,4 @@ export const Adminhome = () => {
   );
 };
 
-
+}

@@ -1,13 +1,13 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import API_BASE_URL from '../config/apiconfig';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../config/apiconfig";
 
 const Summarypage = () => {
   const navigate = useNavigate();
 
   const backclickhandle = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const [Odetails, setOdetails] = useState([]);
@@ -16,36 +16,32 @@ const Summarypage = () => {
   const gettotel = async () => {
     try {
       const res = await axios.get(`${API_BASE_URL}/api/orderdeatils/${userId}`);
-      console.log(res)
-      setOdetails(res.data.data );
-
-      console.log("order details",Odetails)
-    } catch(error) {
+      console.log(res);
+      setOdetails(res.data.data);
+    } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     gettotel();
   }, []);
 
-  // const totelAMount=res.data.data.totalAmount
+  const lastItem = Odetails.length > 0 ? Odetails[Odetails.length - 1] : null;
 
-// console.log("toooooootalamont",totalamount)
-  // Ensure there are order details before accessing them
-  const last = Odetails.length > 0 ? Odetails[Odetails.length - 1] : null;
-  const pro = last ? last.products : [];
- 
+  const pro = lastItem ? lastItem.products : [];
+  console.log(pro, "pro");
+
   // Calculate total if products are available
   const price = pro ? pro.map((item) => item.price * item.qty) : [];
   const total = price.reduce((acc, cur) => acc + cur, 0);
 
-
-
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
       {/* Confirmation Message */}
-      <h2 className="text-3xl font-bold text-center text-green-600 mb-6">Order Confirmed!</h2>
+      <h2 className="text-3xl font-bold text-center text-green-600 mb-6">
+        Order Confirmed!
+      </h2>
 
       {/* Icon or Illustration */}
       <div className="flex justify-center mb-6">
@@ -67,21 +63,29 @@ const Summarypage = () => {
 
       {/* Thank You Message */}
       <div className="text-center mb-6">
-        <p className="text-lg font-medium text-gray-700">Thank you for your purchase! Your order has been successfully placed.</p>
-        <p className="text-sm text-gray-500 mt-2">You will receive a confirmation email shortly.</p>
+        <p className="text-lg font-medium text-gray-700">
+          Thank you for your purchase! Your order has been successfully placed.
+        </p>
+        <p className="text-sm text-gray-500 mt-2">
+          You will receive a confirmation email shortly.
+        </p>
       </div>
 
       {/* Order Summary */}
       <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">Order Details</h3>
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">
+          Order Details
+        </h3>
         <ul className="space-y-2">
           <li className="flex justify-between">
-            <span className="text-gray-700">Order Number:</span>
-            <span className="font-semibold text-gray-800">#{last?last.id:null}</span>
+            <span className="text-gray-700">Order Id:</span>
+            <span className="font-semibold text-gray-800">
+              {lastItem ? lastItem._id : "Loading..."}
+            </span>
           </li>
           <li className="flex justify-between">
             <span className="text-gray-700">Total Amount:</span>
-            <span className="font-semibold text-gray-800">${total}</span> 
+            <span className="font-semibold text-gray-800">${total}</span>
           </li>
         </ul>
       </div>

@@ -13,6 +13,7 @@ const Login = () => {
   };
   const [values, setValues] = useState(initialVal);
   const [error, setError] = useState(null);
+  const [blockedMessage, setBlockedMessage] = useState(null); // Added state to store blocked message
   const navigate = useNavigate();
 
   const inputHandle = (e) => {
@@ -31,12 +32,17 @@ const Login = () => {
       );
 
       const user = response.data.data;
-      console.log("user role", user);
+      console.log("user status:", user.status);
+
+      if (user.status === "noActive") {
+        setBlockedMessage("Your account has been blocked. Please contact us."); // Set the blocked message
+        return; // Prevent further execution
+      }
 
       if (response.data.status === "success") {
         localStorage.setItem("username", user.username);
         localStorage.setItem("role", user.role);
-        localStorage.setItem("userId",user._id)
+        localStorage.setItem("userId", user._id);
 
         toast.success("Login Successfully");
 
@@ -48,7 +54,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log("catch block", error);
-      if (error.response.data.status === "error") {
+      if (error.response && error.response.data.status === "error") {
         setError(error.response.data.message);
       }
     }
@@ -60,6 +66,11 @@ const Login = () => {
         <h2 className="text-2xl font-bold text-center text-gray-700">
           Login to Your Account
         </h2>
+        {blockedMessage && (
+          <div className="text-red-500 text-center mb-4">
+            {blockedMessage} 
+          </div>
+        )}
         <form className="mt-4" onSubmit={toHomepage}>
           <div className="mb-4">
             <label
